@@ -45,10 +45,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger('dev'));
 
+
+
+
 const index = require('./routes/index');
-const auth = require('./routes/auth');
 app.use('/', index);
+const auth = require('./routes/auth');
 app.use('/', auth);
+app.use('/api', require('./routes/apiRoutes'))
 
 // Uncomment this line for production
 // app.get('/*', (req, res) => res.sendFile(__dirname + '/public/index.html'));

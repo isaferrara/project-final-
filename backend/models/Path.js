@@ -19,4 +19,4 @@ const pathSchema = new Schema(
   }
 );
 
-module.exports = model('Path', userSchema);
+module.exports = model('Path', pathSchema);

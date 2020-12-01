@@ -5,6 +5,10 @@ const topicSchema = new Schema(
     title: String,
     objective: String,
     duration: String, 
+    paths: {
+      type: Schema.Types.ObjectId,
+      ref: 'Path'
+    }
   },
   {
     timestamps: true,
@@ -13,4 +17,4 @@ const topicSchema = new Schema(
 );
 
 
-module.exports = model('Topic', userSchema);
+module.exports = model('Topic', topicSchema);

@@ -1,0 +1,1 @@
+exports.catchErr = ctrl => (req, res, next) => ctrl(req, res).catch(next)
