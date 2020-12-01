@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const passport = require('../config/passport');
+const passport = require('../config/serializers');
+
+const { googleInit, googleCb } = require('../controllers/auth')
+// Bcrypt to encrypt passwords
 
 router.post('/signup', (req, res, next) => {
   User.register(req.body, req.body.password)
@@ -28,5 +31,9 @@ router.get('/profile', isAuth, (req, res, next) => {
 function isAuth(req, res, next) {
   req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });
 }
+
+router.get('/google', googleInit)
+
+router.get('/google/callback', googleCb)
 
 module.exports = router;
