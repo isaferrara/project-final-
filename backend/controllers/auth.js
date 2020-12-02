@@ -21,3 +21,7 @@ exports.googleCb = (req, res, next) => {
     })
   })(req, res, next)
 }
+
+exports.currentUser = (req, res) => {
+  res.json(req.user || null)
+}
