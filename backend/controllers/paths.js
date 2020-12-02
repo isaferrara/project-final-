@@ -15,6 +15,7 @@ exports.createPath = async (req, res) => {
       description,
       category,
     })
+    console.log(newPath)
     res.status(201).json( newPath)
   }
 
@@ -33,11 +34,13 @@ exports.updatePath = async (req, res) => {
 
 exports.getAllPaths = async (req, res) => {
     const paths= await Path.find().populate('topics')
+    console.log(paths)
     res.status(200).json(paths)
   }
 
 exports.getSinglePath = async (req, res) => {
     const { id } = req.params
     const path = await Path.findById(id).populate('topics')
+    console.log(path)
     res.status(200).json(path)
   }
