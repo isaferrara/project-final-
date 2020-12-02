@@ -21,12 +21,12 @@ const Login = ({ history }) => {
   return (
     <Row>
       <Col span={24}>
-        <Title level={1}>Login to empower your knowledge</Title>
+        <Title level={1}>Login to empower your skills!</Title>
       </Col>
       <Divider />
       <Col span={24}>
         <Form layout="vertical" form={form} onFinish={handleSubmit}>
-          <Form.Item name='email' label="Email:">
+          <Form.Item name='username' label="Username:">
             <Input />
           </Form.Item>
           <Form.Item name='password' label="Password:">
@@ -40,7 +40,7 @@ const Login = ({ history }) => {
           Or
         </Divider>
         <a href={googleUrl}>
-          <Button block>Singup with Google</Button>
+          <Button block>Login with Google</Button>
         </a>
       </Col>
     </Row>
