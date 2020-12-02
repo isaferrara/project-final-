@@ -5,10 +5,11 @@ import { Redirect } from 'react-router-dom'
 
 
 const Profile = () => {
-  const user = useContextInfo()
-
+  const {user} = useContextInfo()
   console.log(user)
-  return user ? (
+  return <p>{user.email}</p>
+
+    {/* user ? (
     <Row>
       <Col xs={24} sm={24} md={12}>
         <Typography.Title level={3}>
@@ -22,7 +23,7 @@ const Profile = () => {
         <br/>
       </Col>
     </Row>) :
-    <Redirect to='/' />
+    <Redirect to='/' />*/}
 
 }
 
