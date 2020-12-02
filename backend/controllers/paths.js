@@ -34,6 +34,7 @@ exports.updatePath = async (req, res) => {
 
 exports.getAllPaths = async (req, res) => {
     const paths= await Path.find().populate('topics')
+    console.log(paths)
     res.status(200).json(paths)
   }
 
