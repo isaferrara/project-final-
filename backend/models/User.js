@@ -1,14 +1,15 @@
 const { Schema, model } = require('mongoose');
-const PLM = require('passport-local-mongoose');
+//const PLM = require('passport-local-mongoose');
 
 const userSchema = new Schema(
   {
     email: String,
-    name: String,
+    username: String,
     password: String,
+    name: String,
     image: {
-      type:String,
-      default: 'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
+      type: String,
+      default: 'https://coa.pe/public/assets/img/default-user.png'
     },
     paths:[{
       type: Schema.Types.ObjectId,
@@ -21,6 +22,6 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.plugin(PLM, { usernameField: 'email' });
+//userSchema.plugin(PLM, { usernameField: 'email' });
 
 module.exports = model('User', userSchema);
