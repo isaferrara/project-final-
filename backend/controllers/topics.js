@@ -9,7 +9,6 @@ const Path = require('../models/Path')
 
 exports.createTopic = async (req, res) => {
      const { title, objective, duration, pathId} = req.body
-     console.log(req.body)
     const newTopic = await Topic.create({
       title,
       objective,
