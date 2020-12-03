@@ -47,7 +47,7 @@ const LayoutApp = ({ children }) => {
               </Link>
             </Menu.Item>
             <Menu.Item key="6">
-              <Link to="/">
+              <Link to="/donate">
               Donate
               </Link>
             </Menu.Item>

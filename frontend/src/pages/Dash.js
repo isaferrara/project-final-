@@ -24,7 +24,7 @@ const Dash = () => {
             {pathsy?.map(path => (
             <div style={{border:' 1px black solid', margin:'10px'}}>    
             <h1>{path.title}</h1>
-            {path.topics?.map(({title}) => (
+            {path.topics?.map(({title,_id}) => (
                 <p>{title}</p> ))}
             </div>          
             ))}

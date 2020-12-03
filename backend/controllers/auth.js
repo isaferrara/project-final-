@@ -64,7 +64,7 @@ exports.login = async (req, res, next) => {
   })(req, res, next)
 }
 
-exports.loggedIn = (req, res) => {
+exports.currentUser = (req, res) => {
 
   res.json(req.user || null)
 }
