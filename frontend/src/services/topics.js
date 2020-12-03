@@ -4,12 +4,12 @@ const baseURL = 'http://localhost:3000/api/topic'
 
 const pathService = axios.create({ baseURL })
 
-export const getAllPaths = () => pathService.get('')
+export const getAllTopic = () => pathService.get('')
 
-export const getSinglePath = id => pathService.get(`/${id}`)
+export const getSingleTopic = id => pathService.get(`/${id}`)
     
 export const createTopic =  path => pathService.post(`/create`, path)
     
-export const updatePath = (id, path) => pathService.put(`/${id}`, path)
+export const updateTopic = (id, topic) => pathService.put(`/${id}`, topic)
     
- export const deletePath = id => pathService.delete(`/${id}`) 
+ export const deleteTopic = id => pathService.delete(`/${id}`) 

@@ -1,13 +1,10 @@
 const Topic = require('../models/Topic')
 const Path = require('../models/Path')
-// createTopic,
-// deleteTopic,
-// getAllTopic,
-// getSingleTopic,
-// updateTopic
+
+
 
 exports.createTopic = async (req, res) => {
-    const { title, objective, duration, pathId} = req.body
+    const { title, objective, duration, pathId } = req.body
     const newTopic = await Topic.create({
         title,
         objective,

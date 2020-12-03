@@ -15,12 +15,22 @@ import {
     Space
 } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import {useContextInfo} from '../hooks/context'
 
  const CreatePath = (props) => {
     const [form] = Form.useForm()
+    const {user}= useContextInfo()
 
     const submitForm=  async (path) =>{ 
-        const {data}= await createPath(path)
+        const {data}= await createPath(
+            {
+            title: path.title,
+            description:path.description,
+            category: path.category,
+            userId: user._id
+        }
+        )
+
         const {_id}= data
         await path.topics.map( topics=>{
             createTopic(
@@ -31,7 +41,7 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
             })
         })
         form.resetFields()
-        props.history.push('/dash')
+        props.history.push(`/dash/${path._id}`)
         }
 
 
@@ -116,7 +126,7 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
                 <Form.Item>
                 <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                    Add field
+                    Add Topic
                 </Button>
                 </Form.Item>
             </>

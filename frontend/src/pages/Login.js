@@ -15,9 +15,8 @@ const Login = ({ history }) => {
   async function handleSubmit(userInput) {
     const { data } = await loginFn(userInput)
     login(data);
-    history.push('/profile')
+    history.push(`/dash/${data._id}`)
   }
-
   return (
     <Row>
       <Col span={24}>

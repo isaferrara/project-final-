@@ -1,22 +1,19 @@
 const Path = require('../models/Path')
-const Topic = require('../models/Topic')
+const User = require('../models/User')
 
-
-//   createPath,
-//   deletePath,
-//   getAllPaths,
-//   getSinglePath,
-//   updatePath
 
 exports.createPath = async (req, res) => {
-    const { title, description, category} = req.body
+    const { title, description, category, userId} = req.body
     const newPath = await Path.create({
       title,
       description,
       category,
+      users:userId
     })
-    console.log(newPath)
+
+    await User.findByIdAndUpdate(userId, { $push: { users: newPath._id } })
     res.status(201).json( newPath)
+    
   }
 
   exports.deletePath = async (req, res) => {
@@ -34,13 +31,16 @@ exports.updatePath = async (req, res) => {
 
 exports.getAllPaths = async (req, res) => {
     const paths= await Path.find().populate('topics')
-    console.log(paths)
     res.status(200).json(paths)
   }
 
 exports.getSinglePath = async (req, res) => {
     const { id } = req.params
     const path = await Path.findById(id).populate('topics')
-    console.log(path)
     res.status(200).json(path)
   }
+
+  // exports.getAllUserPaths = async (req, res) => {
+  //   const paths= await Path.find().populate('topics')
+  //   res.status(200).json(paths)
+  // }

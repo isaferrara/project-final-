@@ -35,7 +35,7 @@ function UpdateProfileForm({
         <Button block type="primary" htmlType="submit">
             Update
         </Button>
-        </Form >
+        </Form>
     )
 }
 

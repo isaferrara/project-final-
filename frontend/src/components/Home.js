@@ -8,7 +8,6 @@ function Home() {
       async function getPaths() {
           const {data} = await getAllPaths()
           setPaths(data)
-          console.log(data)
 
       }
       getPaths()

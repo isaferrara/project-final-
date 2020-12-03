@@ -5,10 +5,10 @@ const topicSchema = new Schema(
     title: String,
     objective: String,
     duration: String, 
-    paths: {
+    paths: [{
       type: Schema.Types.ObjectId,
       ref: 'Path'
-    }
+    }]
   },
   {
     timestamps: true,

@@ -9,11 +9,18 @@ const pathSchema = new Schema(
         type: String,
         enum: ['Web Dev', 'Ux/Ui', 'Dev Ops', 'Data Science', 'Cyber Security']
     },
-    topics:[{
+    topics:
+    [{
       type: Schema.Types.ObjectId,
       ref: 'Topic'
-    }]
-  },
+    }],
+    users:[
+      {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ]
+},
   {
     timestamps: true,
     versionKey: false

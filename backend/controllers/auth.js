@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+const Path = require('../models/Path')
 
 exports.signup = async (req, res) => {
   const { username, password, email,name} = req.body
@@ -10,7 +11,6 @@ exports.signup = async (req, res) => {
       .status(403)
       .json({ message: 'Provide username and password' })
   }
-
   const user = await User.findOne({ username })
 
   if (user) {
@@ -26,11 +26,11 @@ exports.signup = async (req, res) => {
     username,
     password: hashPass,
     email,
-    name
+    name,
+
   })
 
   newUser.password = null
-
   res.status(201).json(newUser)
 }
 
