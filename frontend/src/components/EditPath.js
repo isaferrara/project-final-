@@ -17,21 +17,22 @@ const EditPath = (props) => {
     const { user } = useContextInfo()
     const [form] = Form.useForm()
     const history = useHistory()
-    const [pathsy, setPaths] = useState(null)
+    const [pathsy, setPaths] = useState(props)
 
 
     console.log(props)
-    useEffect(() => {
-        async function getPaths() {
-            const {data} = await getSinglePath(props._id)
-            setPaths(data) 
-        }
-        getPaths()
-        }, [])
+    // useEffect(() => {
+    //     async function getPaths() {
+    //         const {data} = await getSinglePath(props._id)
+    //         setPaths(data) 
+    //     }
+    //     getPaths()
+    //     }, [])
 
 
     async function handleSubmit(values) {
        const {data} =await updatePath(props._id, values)
+       console.log(data)
        history.push(`/path/${props._id}`)
        setPaths(data)  
        props.setForms() 
@@ -45,9 +46,9 @@ const EditPath = (props) => {
     return (
 <div style={{ padding: '1rem 3rem' }}>
 <Form form={form} layout="vertical" onFinish={handleSubmit} autoComplete="off" initialValues={{
-        title: props.title,
-        description: props.description,
-        category:props.category
+        title: pathsy.title,
+        description: pathsy.description,
+        category:pathsy.category
         }}>
             <Form.Item
             name="title"
