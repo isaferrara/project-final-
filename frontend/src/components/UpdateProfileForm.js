@@ -15,7 +15,7 @@ function UpdateProfileForm({
 
     async function handleSubmit(values) {
         await updateFn(_id, values)
-        setUser(values)
+        //setUser(values)
         console.log(values)
         history.push('/')
     }

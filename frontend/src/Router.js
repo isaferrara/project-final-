@@ -13,12 +13,18 @@ import Dash from './pages/Dash'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 import DetailsPath from './pages/DetailsPath'
+import Multimedia from './pages/Multimedia'
+import Donate from './pages/Donate'
 
 ///Dummy Components
 //const Home = () => <h1>Home</h1>
 // const Login = () => <h1>Login</h1>
 // const Signup = () => <h1>Signup</h1>
 // const Profile = () => <h1>Profile</h1>
+
+const Success = () => <h1>Success Payment</h1>
+const Failure = () => <h1>Failure Payment</h1>
+const Pending = () => <h1>Pending Payment</h1>
 
 const Router = () => {
   return (
@@ -31,7 +37,12 @@ const Router = () => {
       <Route path='/path/:id' component={DetailsPath} exact />
       <Route path='/login' component={Login} exact/>
       <Route path='/signup' component={Signup} exact/>
-      <Route path='/profile' component={Profile} exact />
+      <Route path='/profile' component={Profile}exact />
+      <Route path='/multimedia' component={Multimedia}exact />
+      <Route path='/donate' component={Donate}exact />
+      <Route exact path="/success" component={Success} />
+      <Route exact path="/failure" component={Failure} />
+      <Route exact path="/pending" component={Pending} />
     {/*<Route component={NotFound} />*/}
       </LayoutApp>
     </BrowserRouter>

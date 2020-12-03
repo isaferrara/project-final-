@@ -3,7 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 
 const { isAuth } = require('../middlewares')
-const { signup, login, logout, loggedIn, edit, googleInit, googleCb } = require('../controllers/auth')
+const { signup, login, logout, currentUser, edit, googleInit, googleCb } = require('../controllers/auth')
 // Bcrypt to encrypt passwords
 
 
@@ -12,7 +12,7 @@ router.post("/login", login);
 
 router.post("/signup", signup);
 
-router.get('/loggedIn', loggedIn)
+router.get('/current-user', currentUser)
 
 router.get("/logout",isAuth, logout);
 
