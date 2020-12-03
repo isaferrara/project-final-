@@ -14,8 +14,8 @@ import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 import DetailsPath from './pages/DetailsPath'
 
-
-// const Home = () => <h1>Home</h1>
+///Dummy Components
+//const Home = () => <h1>Home</h1>
 // const Login = () => <h1>Login</h1>
 // const Signup = () => <h1>Signup</h1>
 // const Profile = () => <h1>Profile</h1>

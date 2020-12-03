@@ -1,4 +1,5 @@
 import React from 'react'
+import {useState} from 'react'
 import { Form, Input, Button } from 'antd'
 import { updateFn } from '../services/auth'
 import { useHistory } from 'react-router-dom'
@@ -10,10 +11,12 @@ function UpdateProfileForm({
     }) {
     const [form] = Form.useForm()
     const history = useHistory()
+    const [user, setUser] = useState()
 
     async function handleSubmit(values) {
         await updateFn(_id, values)
-        console.log(_id)
+        setUser(values)
+        console.log(values)
         history.push('/')
     }
 
