@@ -11,7 +11,6 @@ export const PathInfo = (props) => {
     const { user } = useContextInfo()
     const [showEditForm, setShowEditForm] = useState(false)
     const [showInfo, setShowInfo] = useState(true)
-    console.log(props._id)
 
     useEffect(() => {
         async function getPaths() {

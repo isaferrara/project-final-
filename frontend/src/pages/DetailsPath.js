@@ -32,7 +32,6 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
 
      function sum(i) {
         i++
-        console.log(i)
             }
 
     function setForms(){
