@@ -90,7 +90,7 @@ const Dash = () => {
                            
                             {path.topics?.map((topic) => (
                                 <div> 
-                                <Checkbox onChange={handleSubmit} if={topic}>
+                                <Checkbox onChange={handleSubmit} id={topic}>
                                     <h3>{topic.title}</h3> 
                                     </Checkbox>
 
