@@ -1,6 +1,6 @@
 import React from 'react'
-import { Row, Col, Form, Input, Button, Typography, Divider } from 'antd'
-import { loginFn } from '../services/auth'
+import { Row, Col, Form, Input, Button, Typography, Divider,message } from 'antd'
+import { loginFn, profile } from '../services/auth'
 import { useContextInfo } from '../hooks/context'
 
 const { Title } = Typography
@@ -13,9 +13,19 @@ const Login = ({ history }) => {
   const { login } = useContextInfo()
 
   async function handleSubmit(userInput) {
-    const { data } = await loginFn(userInput)
+    /*const { data } = await loginFn(userInput)
     login(data);
-    history.push(`/dash/${data._id}`)
+    history.push(`/dash/${data._id}`)*/
+    try {
+      await loginFn(userInput)
+      const {
+        data: { user }
+      } = await profile()
+      login(user)
+      history.push("/")
+    } catch (err) {
+      message.error("Error with email or password")
+    }
   }
   return (
     <Row>

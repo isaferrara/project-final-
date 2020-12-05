@@ -15,6 +15,7 @@ import Profile from './pages/Profile'
 import DetailsPath from './pages/DetailsPath'
 import Multimedia from './pages/Multimedia'
 import Donate from './pages/Donate'
+import PrivateRoute from "./components/PrivateRoute"
 
 ///Dummy Components
 //const Home = () => <h1>Home</h1>
@@ -37,9 +38,9 @@ const Router = () => {
       <Route path='/path/:id' component={DetailsPath} exact />
       <Route path='/login' component={Login} exact/>
       <Route path='/signup' component={Signup} exact/>
-      <Route path='/profile' component={Profile}exact />
+      <PrivateRoute path='/profile' component={Profile}exact />
       <Route path='/multimedia' component={Multimedia}exact />
-      <Route path='/donate' component={Donate}exact />
+      <PrivateRoute path='/donate' component={Donate}exact />
       <Route exact path="/success" component={Success} />
       <Route exact path="/failure" component={Failure} />
       <Route exact path="/pending" component={Pending} />

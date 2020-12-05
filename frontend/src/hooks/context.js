@@ -1,4 +1,4 @@
-import {
+/*import {
     useState,
     createContext,
     useContext,
@@ -41,4 +41,42 @@ import React from 'react'
     // Opcional: agregamos un custom hook para evitar consumir en cada componente nuestro ctx
     
     export const useContextInfo = () => useContext(AppContext)
+    */
+
+   import { useState, createContext, useContext, useEffect } from "react"
+   import React from 'react'
+   import { currentUserFn } from '../services/auth'
+
+   const AppCtx = createContext()
+   
+   export const CtxProvider = props => {
+     //Para ver el comportamiento de la ruta privada, cambia a true el valor de inicio del state
+     const [user, setUser] = useState(null)
+   
+     const login = user => setUser(user)
+     const logout = _ => setUser(null)
+   
+     const value = {
+       user,
+       login,
+       logout
+     }
+
+     useEffect(() => {
+        async function getSessionData() {
+            const { data } = await currentUserFn()
+            login(data);
+        }
     
+        getSessionData()
+        }, [])
+
+     
+   
+     return <AppCtx.Provider {...props} value={value} />
+   }
+   
+   export const useContextInfo = () => {
+     const ctx = useContext(AppCtx)
+     return ctx
+   }

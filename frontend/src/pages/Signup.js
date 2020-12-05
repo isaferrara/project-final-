@@ -1,24 +1,56 @@
-import React from 'react'
-import { Row, Col, Form, Input, Button, Typography, Divider } from 'antd'
+import React, { useState } from 'react'
+import { Row, Col, Form, Input, Button, Typography, Divider, Upload } from 'antd'
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import {PasswordInput} from 'antd-password-input-strength'
 import { signupFn } from '../services/auth'
+import axios from 'axios'
 
 const { Title } = Typography
+
+const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/djjro5m0g/image/upload' 
 
 const googleUrl = process.env.NODE_ENV === 'development' ?
   "http://localhost:3000/auth/google" : '/auth/google'
 
 const Signup = ({ history }) => {
   const [form] = Form.useForm()
+  const [img, setImg] = useState(null)
+  const [loading, setLoading] = useState(null)
 
   async function handleSubmit(userInput) {
-    await signupFn(userInput)
+    //await signupFn(userInput)
+    //history.push('/login')
+    //console.log(userInput)
+    const usr = {...userInput, image: img}
+    const {data : newUsr} = await signupFn(usr)
+    console.log(newUsr)
     history.push('/login')
   }
 
   const onReset = () => {
     form.resetFields();
   };
+
+  async function handleUploadFile(file){
+    //console.log(info)
+    setLoading(true)
+    const data = new FormData()
+
+    data.append('file', file)
+    data.append('upload_preset', 'project-final-')
+
+    const {data: {secure_url}} = await axios.post(cloudinaryAPI, data)
+
+    setImg(secure_url)
+    setLoading(false)
+  }
+
+  const uploadButton = (
+      <div>
+        {loading ? <LoadingOutlined /> : <PlusOutlined />}
+        <div style={{ marginTop: 8 }}>Upload</div>
+      </div>
+    );
 
   return (
     <Row>
@@ -52,6 +84,17 @@ const Signup = ({ history }) => {
           
           <Form.Item name='name' label="Name:" rules={[{ required: true, message: 'Please input your name!' }]}>
             <Input/>  
+          </Form.Item>
+
+          <Form.Item name='image' label="Image:" rules={[{ required: true, message: 'Please add an image!' }]}>
+            <Upload 
+              name="image"
+              showUploadList={false}
+              beforeUpload={handleUploadFile}
+              listType="picture-card"
+            >
+              {img ? <img src={img} style={{width : '100%'}} /> : uploadButton}
+            </Upload>  
           </Form.Item>
 
           <Button type="primary" block htmlType="submit">

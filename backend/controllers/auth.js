@@ -4,7 +4,7 @@ const passport = require('passport')
 const Path = require('../models/Path')
 
 exports.signup = async (req, res) => {
-  const { username, password, email,name} = req.body
+  const { username, password, email,name, image} = req.body
 
   if (!username || !password) {
     return res
@@ -27,7 +27,7 @@ exports.signup = async (req, res) => {
     password: hashPass,
     email,
     name,
-
+    image
   })
 
   newUser.password = null
@@ -77,9 +77,9 @@ exports.logout = (req, res) => {
 
 exports.edit = async (req, res) => {
   const { id } = req.params
-  const { username, name, email } = req.body
+  const { username, name, email, image } = req.body
 
-  await User.findByIdAndUpdate(id, { username, name, email})
+  await User.findByIdAndUpdate(id, { username, name, email, image})
 
   res.status(202).json({ message: 'Profile updated' })
 }
