@@ -1,14 +1,38 @@
-import { useState} from 'react'
+import { useState, useEffect} from 'react'
 import React from 'react'
 import { Typography, Row, Col, Button } from 'antd'
 import { useContextInfo } from '../hooks/context'
 import { Redirect } from 'react-router-dom'
 import UpdateProfileForm from '../components/UpdateProfileForm'
+import { currentUserFn } from '../services/auth'
+
+//traer login y currentuser y hacer useEffect
 
 const Profile = () => {
-  const { user } = useContextInfo()
+  //const { user } = useContextInfo()
   const [showEditForm, setShowEditForm] = useState(false)
-  console.log(user.image, user.email)
+  const [user, setUser] = useState(null)
+   
+  const login = user => setUser(user)
+
+
+  const value = {
+    user,
+    login
+  }
+
+  useEffect(() => {
+     async function getSessionData() {
+         const { data } = await currentUserFn()
+         login(data);
+         console.log(user)
+     }
+ 
+     getSessionData()
+     }, [])
+
+
+
   return user ? (
     <Row>
       <Col xs={24} sm={24} md={12}>
@@ -38,7 +62,7 @@ const Profile = () => {
         </Typography.Title>
       </Col>
     </Row>) :
-    <Redirect to='/' />
+    <Redirect to='/profile' />
 
 }
 

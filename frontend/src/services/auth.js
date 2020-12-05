@@ -23,3 +23,5 @@ export const logoutFn = () =>
 export const updateFn = (id, user) =>
 authService.post(`/edit/${id}`, user)
 
+export const profile = () => authService.get("/profile")
+
