@@ -17,7 +17,6 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
     useEffect(() => {
         async function getPaths() {
             const {data} = await getSinglePath(id)
-
             setPaths(data) 
         }
         getPaths()
@@ -32,7 +31,6 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
 
      function sum(i) {
         i++
-        console.log(i)
             }
 
     function setForms(){

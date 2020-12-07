@@ -16,13 +16,14 @@ const Login = ({ history }) => {
     /*const { data } = await loginFn(userInput)
     login(data);
     history.push(`/dash/${data._id}`)*/
+
     try {
       await loginFn(userInput)
       const {
         data: { user }
       } = await profile()
       login(user)
-      history.push("/")
+      history.push(`/dash/${user._id}`)
     } catch (err) {
       message.error("Error with email or password")
     }

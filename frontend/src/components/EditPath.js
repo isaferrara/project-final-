@@ -17,22 +17,27 @@ const EditPath = (props) => {
     const { user } = useContextInfo()
     const [form] = Form.useForm()
     const history = useHistory()
-    const [pathsy, setPaths] = useState(props)
+    const [pathsy, setPaths] = useState(null)
 
 
-    console.log(props)
-    // useEffect(() => {
-    //     async function getPaths() {
-    //         const {data} = await getSinglePath(props._id)
-    //         setPaths(data) 
-    //     }
-    //     getPaths()
-    //     }, [])
+    useEffect(() => {
+        async function getPaths() {
+            const {data} = await getSinglePath(props._id)
+            setPaths(data) 
+        }
+        getPaths()
+        }, [])
 
 
     async function handleSubmit(values) {
-       const {data} =await updatePath(props._id, values)
-       console.log(data)
+        const {data: single} = await getSinglePath(props._id)
+       const {data} =await updatePath(props._id, 
+       {
+        title: values.title,
+        description: values.description,
+        category: values.category,
+        topics: single.topics
+       } )
        history.push(`/path/${props._id}`)
        setPaths(data)  
        props.setForms() 
@@ -42,13 +47,13 @@ const EditPath = (props) => {
         history.push(`/path/${props._id}`)
         props.setForms()
     }
-
     return (
-<div style={{ padding: '1rem 3rem' }}>
-<Form form={form} layout="vertical" onFinish={handleSubmit} autoComplete="off" initialValues={{
+        <div style={{ padding: '1rem 3rem' }}>
+        {pathsy? (<Form form={form} layout="vertical" onFinish={handleSubmit} autoComplete="off" initialValues={{
         title: pathsy.title,
         description: pathsy.description,
-        category:pathsy.category
+        category:pathsy.category,
+        topics:pathsy.topics,
         }}>
             <Form.Item
             name="title"
@@ -56,7 +61,7 @@ const EditPath = (props) => {
             rules={[
             {
                 required: true,
-                message: 'Please input a title!',
+                message: 'Please write a title!',
             },
             ]}>
             <Input />
@@ -68,7 +73,7 @@ const EditPath = (props) => {
             rules={[
             {
                 required: true,
-                message: 'Please input a description!',
+                message: 'Please write a description!',
             }, 
             ]}>
               <Input.TextArea />
@@ -91,8 +96,12 @@ const EditPath = (props) => {
             Cancel
         </Button>
         </div>
-        
         </Form>
+        ):(
+
+            <Skeleton active />
+        )}
+
 
     </div>
     )
