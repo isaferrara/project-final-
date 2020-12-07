@@ -24,9 +24,9 @@ exports.createPath = async (req, res) => {
   
 exports.updatePath = async (req, res) => {
     const { id } = req.params
-    const { title, description, category } = req.body
-    await Path.findByIdAndUpdate(id, { title, description, category })
-    res.status(202).json({ message: 'Project updated' })
+    const { title, description, category, topics } = req.body
+    const pathsy= await Path.findByIdAndUpdate(id, { title, description, category, topics })
+    res.status(202).json(pathsy)
   }
 
 exports.getAllPaths = async (req, res) => {

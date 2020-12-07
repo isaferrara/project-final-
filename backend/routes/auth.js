@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require('passport');
 const router = express.Router();
+const User = require('../models/User')
 
 const { isAuth } = require('../middlewares')
 const { signup, login, logout, currentUser, edit, googleInit, googleCb } = require('../controllers/auth')

@@ -24,13 +24,11 @@ function Donate() {
 
   // Agregamos un efecto no solo para obtener la informacion del producto pero tambien para 
   // Agregar como hijo al elemento de nuestra referencia un script generado con la API del DOM (document.createElement)
-  useEffect(() => {
-
-    async function fetchProduct(){
+  useEffect(async () => {
     const { data: product } = await getProduct()
     console.log(product.unit_price)
     //product.unit_price = 300
-    //console.log(product.unit_price)
+    console.log(product.unit_price)
 
     // Generamos el script que nos pide mercado pago pero a mano con createElement
     const script = document.createElement("script");
@@ -42,11 +40,7 @@ function Donate() {
     paymentContainereRef.current.appendChild(script);
 
     setProduct(product);
-    }
-    fetchProduct()
-    
   }, [])
-
   return (
     <div>
       <h1>Donate</h1>
