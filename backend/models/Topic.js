@@ -4,7 +4,8 @@ const topicSchema = new Schema(
   {
     title: String,
     objective: String,
-    duration: String, 
+    duration: String,
+    content: [String],
     paths: [{
       type: Schema.Types.ObjectId,
       ref: 'Path'

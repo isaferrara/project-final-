@@ -37,6 +37,7 @@ import {useContextInfo} from '../hooks/context'
             {title:topics.title,
             objective: topics.objective,
             duration: topics.duration,
+            content: topics.content,
             pathId:_id
             })
         })
@@ -114,7 +115,7 @@ import {useContextInfo} from '../hooks/context'
                     {...field}
                     name={[field.name, 'duration']}
                     fieldKey={[field.fieldKey, 'duration']}
-                    rules={[{ required: true, message: 'Missing last name' }]}
+                    rules={[{ required: true, message: 'Missing title' }]}
                     >
                     <Input placeholder="Duration" />
                     </Form.Item>

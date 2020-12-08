@@ -116,9 +116,13 @@ const Dash = () => {
                         <Card hoverable   >
                             <Link to={`/path/${path._id}`}> <h1>{path.title}</h1> </Link>  
                             <Divider>Topics</Divider>
+                            
                             {path.topics?.map((topic, index ) => (
+                                <Card hoverable   >
                                         <p>{topic.title}</p>
+                                </Card>        
                             ))}
+                            
                         </Card>
     
                         </div>        
@@ -148,11 +152,15 @@ const Dash = () => {
                                 <Link to={`/path/${path._id}`}> <h1>{path.title}</h1> </Link> 
                                 <Divider>Topics</Divider>
                                 <div style={{ padding: '1rem', display:'flex', flexDirection:'column', width:'350px' }} >
-                                    {path.topics?.map((topic, index) => (
-                                        <Checkbox value={topic}>
-                                        <p>{topic.title}</p>
-                                        </Checkbox>
-                                    ))}
+                                    
+                                        {path.topics?.map((topic, index) => (
+                                            <Card hoverable   >
+                                                <Checkbox value={topic}>
+                                                <p>{topic.title}</p>
+                                                </Checkbox>
+                                            </Card> 
+                                        ))}
+                                        
                                 </div>
                                 </Card>    
                                 </div>   
