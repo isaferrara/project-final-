@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { getProduct } from './../services/products';
+import { getProduct400 } from '../services/products';
 import React from 'react'
 
 // Quiza se torna un poco mas complejo integrar mercadopago pero les dejo la explicacion linea por linea,
@@ -15,7 +15,7 @@ import React from 'react'
 // Generamos mediante manipulacion del dom el script necesario con los atributos que pide MP y le hacemos append a 
 // ese elemento del dom el script como hijo
 
-function Donate() {
+function Donate400() {
   const [product, setProduct] = useState(null)
   // Creamos la referencia sin un parametro en el hook use Ref, inicialmente no tiene valor, 
   // Una vez que se asigna a un elemento de jsx como prop ref ese elemento se almacena 
@@ -24,11 +24,14 @@ function Donate() {
 
   // Agregamos un efecto no solo para obtener la informacion del producto pero tambien para 
   // Agregar como hijo al elemento de nuestra referencia un script generado con la API del DOM (document.createElement)
-  useEffect(async () => {
-    const { data: product } = await getProduct()
+  useEffect(() => {
+
+    async function fetchProduct(){
+    const { data: product } = await getProduct400()
     console.log(product.unit_price)
     //product.unit_price = 300
-    console.log(product.unit_price)
+    product.currency_id = 'MXN'
+    //console.log(product.unit_price)
 
     // Generamos el script que nos pide mercado pago pero a mano con createElement
     const script = document.createElement("script");
@@ -40,10 +43,15 @@ function Donate() {
     paymentContainereRef.current.appendChild(script);
 
     setProduct(product);
+    }
+    fetchProduct()
+    
   }, [])
+
   return (
     <div>
       <h1>Donate</h1>
+      <p>{product?.unit_price}</p>
       <pre>{JSON.stringify(product, null, 2)}</pre>
       {/* asignamos la referencia al elemento que queremos que contenga el boton de mercadopago (que lo trae nuestro script) */}
       <div ref={paymentContainereRef}></div>
@@ -51,4 +59,4 @@ function Donate() {
   );
 }
 
-export default Donate;
+export default Donate400;

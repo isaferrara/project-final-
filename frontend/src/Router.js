@@ -14,8 +14,14 @@ import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 import DetailsPath from './pages/DetailsPath'
 import Multimedia from './pages/Multimedia'
-import Donate from './pages/Donate'
+import Donate100 from './pages/Donate100'
+import Donate200 from './pages/Donate200'
+import Donate300 from './pages/Donate300'
+import Donate400 from './pages/Donate400'
+import Progreso from "./pages/Progreso"
+import ChooseDonation from './pages/ChooseDonation'
 import PrivateRoute from "./components/PrivateRoute"
+
 
 ///Dummy Components
 //const Home = () => <h1>Home</h1>
@@ -40,7 +46,12 @@ const Router = () => {
       <Route path='/signup' component={Signup} exact/>
       <PrivateRoute path='/profile' component={Profile}exact />
       <Route path='/multimedia' component={Multimedia}exact />
-      <PrivateRoute path='/donate' component={Donate}exact />
+      <Route path='/choose-donation' component={ChooseDonation}exact />
+      <Route path='/donate100' component={Donate100}exact />
+      <Route path='/donate200' component={Donate200}exact />
+      <Route path='/donate300' component={Donate300}exact />
+      <Route path='/donate400' component={Donate400}exact />
+      <Route path='/progreso' component={Progreso}exact />
       <Route exact path="/success" component={Success} />
       <Route exact path="/failure" component={Failure} />
       <Route exact path="/pending" component={Pending} />
