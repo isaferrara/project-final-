@@ -1,18 +1,21 @@
 import React, {useState, useEffect} from 'react'
 import { useContextInfo } from '../hooks/context'
-import { getSinglePath, deletePath, updatePath } from '../services/paths.js'
-import { Typography, Skeleton, Divider, Card, Button, Link } from 'antd'
+import { getSinglePath, deletePath } from '../services/paths.js'
+import {  deleteTopic, createTopic} from '../services/topics.js'
+import { Skeleton, Divider, Card, Button, Modal, Form, Input} from 'antd'
 import EditPath from '../components/EditPath'
 import PathInfo from '../components/PathInfo'
+import { Link } from 'react-router-dom'
 
-
-const { Title } = Typography
 
 const DetailsPath = ({ match: { params: { id } }, history }) => {
+    const [form] = Form.useForm()
     const [pathsy, setPaths] = useState(null)
     const [showEditForm, setShowEditForm] = useState(false)
     const [showInfo, setShowInfo] = useState(true)
+    const [changes, setChanges] = useState(false)
     const { user } = useContextInfo()
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     useEffect(() => {
         async function getPaths() {
@@ -20,14 +23,13 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
             setPaths(data) 
         }
         getPaths()
-        }, [])
+        }, [changes])
 
     async function handleDelete() {
         await deletePath(id)
         history.push(`/dash/${user._id}`)
         }
         
-
 
      function sum(i) {
         i++
@@ -38,36 +40,99 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
         setShowInfo(!showInfo)
         }
 
+    const showModal = () => {
+        setIsModalVisible(true);
+        }
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    }
+
+    const createNewTopic= async (value)=>{
+        const {data: newTopic}= await createTopic(
+            {title:value.title,
+            objective: value.objective,
+            duration: value.duration,
+            content:value.content,
+            pathId:pathsy._id
+            })
+        setIsModalVisible(false);
+        form.resetFields()
+        console.log(newTopic)
+        setChanges(!changes)
+           
+    }
+
+
     return (
 <div style={{ padding: '1rem 3rem' }}>
-      {pathsy? (<div>
-            {showInfo && <PathInfo {...pathsy} setForms={setForms} /> }
-            <br />
-            {showEditForm && <EditPath {...pathsy} setForms={setForms}/>}
+    {pathsy? (<div>
+        {showInfo && <PathInfo {...pathsy} setForms={setForms} /> }
+        <br />
+        {showEditForm && <EditPath {...pathsy} setForms={setForms}/>}
 
-        <Divider>Topics</Divider>
+    <Divider>Topics</Divider>
+    <Button type="ghost" onClick={showModal} block >Add Topic</Button>
+    
+    {pathsy.topics.map((topic, i) => 
+        <Link to={`/topic/${topic._id}`}>
+    <Card hoverable number={sum(i)} title={ (i+1) + '     ' + topic.title  } style={{marginBottom:'10px'}}>
+    
+    <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>        
+        <div style={{display:'flex', flexDirection:'column', textAlign:'left', marginLeft: '40px'}}>
+        <p style={{marginBottom:'3px'}} > 
 
-        {pathsy.topics.map((topic, i) => <Card hoverable number={sum(i)} title={topic.title} style={{marginBottom:'10px'}}  >
-        <div style={{display:'flex', flexDirection:'row'}}>        
-        <h3 style={{margin:'10px'}}>{i+1}</h3>
-            <div style={{display:'flex', flexDirection:'column', textAlign:'left'}}>
-            <p style={{marginBottom:'3px'}} > <b>Objective:</b> {topic.objective}</p>
-            <p style={{marginBottom:'3px', paddingLeft:'0px'}} > <b>Duration:</b> {topic.duration}</p>
+        <b>Objective:</b> 
+            {topic.objective}</p>
+            <p>{topic._id}</p>
+            <p style={{marginBottom:'3px', paddingLeft:'0px'}} > 
+
+        <b>Duration:</b>
+        {topic.duration}</p>
+    </div>
+
+            <div>
+            <Button type="ghost" onClick={ async ()=> {
+                await deleteTopic(topic._id)
+                setChanges(!changes)}}>Delete</Button> 
             </div>
-        </div>
-        {/* <br /> */}
-        {/* <Button type="ghost" >Edit Topic</Button> */}
-        </Card>)}
+    </div>
+    </Card>
+    </Link>
+    )}
+    
+    <Divider></Divider>
+    <Button type="ghost" onClick={handleDelete} danger block >Delete Path</Button>
+    
+    {/* modal to add new topics  */} 
+
+        <Modal
+        title="Add topic"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        okText="Add"
+        cancelText="cancel"
+        >
+            <Form onFinish={createNewTopic} form={form}>
+        <Form.Item name="title" label="Title" rules={[{ required: true, message: 'Missing title' }]}>
+            <Input placeholder="Title" />
+        </Form.Item>
+
+        <Form.Item name="objective" label="Objective" rules={[{ required: true, message: 'Missing objective' }]}>
+            <Input.TextArea placeholder="Objective" />
+        </Form.Item>
+
+        <Form.Item name="duration" label="Duration" rules={[{ required: true, message: 'Missing duration' }]}>
+            <Input placeholder="Estimated duration " />
+        </Form.Item>
+        <Form.Item name="content" hidden/>
+        <Button type="ghost" htmlType='submit' block >Add topic</Button>
+            
+        </Form>
+            </Modal>
         
-        <Divider></Divider>
-        <Button
-          type="ghost"
-          onClick={handleDelete}
-          danger
-          block
-        >Delete Project</Button>
-      </div>
-      ) : (
+    </div>
+    ) : (
           <Skeleton active />
         )}
     </div>

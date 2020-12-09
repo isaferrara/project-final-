@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import { useContextInfo } from '../hooks/context'
 import { getSinglePath} from '../services/paths.js'
 import { Typography , Skeleton, Button} from 'antd'
 
@@ -8,7 +7,6 @@ const { Title } = Typography
 
 export const PathInfo = (props) => {
     const [pathsy, setPaths] = useState(null)
-    const { user } = useContextInfo()
 
 
     useEffect(() => {

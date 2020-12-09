@@ -13,6 +13,7 @@ import Dash from './pages/Dash'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 import DetailsPath from './pages/DetailsPath'
+import ContentTopic from './pages/ContentTopic'
 import Multimedia from './pages/Multimedia'
 import Donate100 from './pages/Donate100'
 import Donate200 from './pages/Donate200'
@@ -42,6 +43,7 @@ const Router = () => {
       <Route component={NotFound} />
       <Route path='/path/create' component={CreatePath} exact />
       <Route path='/path/:id' component={DetailsPath} exact />
+      <Route path='/topic/:id' component={ContentTopic} exact />
       <Route path='/login' component={Login} exact/>
       <Route path='/signup' component={Signup} exact/>
       <PrivateRoute path='/profile' component={Profile}exact />
