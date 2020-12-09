@@ -1,24 +1,11 @@
 import React, {useState, useEffect}from 'react'
-import { getAllPaths, getSinglePath, updatePath} from '../services/paths.js'
-import { getSingleTopic, getAllTopic} from '../services/topics.js'
+import { getAllPaths, updatePath} from '../services/paths.js'
 import { Checkbox, Button, Modal, Form,  Card, Divider} from 'antd'
 import { Link } from 'react-router-dom'
 import { useContextInfo } from '../hooks/context'
 import { Input } from 'antd';
-import { AudioOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
-
-const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: '#1890ff',
-      }}
-    />
-  );
-
-
 
 const Dash = () => {
     const { user } = useContextInfo()
@@ -38,7 +25,7 @@ const Dash = () => {
                 info.users[0]===user._id
             )
             //get recommended paths--users starts with all existing paths//
-            const interestPaths = data.filter((info)=>
+            data.filter((info)=>
             info.users[0]===user._id
         )
             setOtherPaths(data)
@@ -83,7 +70,7 @@ const Dash = () => {
                     console.log(newTopics, 'selected topics')
 
 
-                    const {data} =await updatePath(idPath, 
+                    await updatePath(idPath, 
                         {title: values['checkbox-group'][i].title,
                         description: values['checkbox-group'][i].description,
                         category:values['checkbox-group'][i].category,
@@ -116,9 +103,13 @@ const Dash = () => {
                         <Card hoverable   >
                             <Link to={`/path/${path._id}`}> <h1>{path.title}</h1> </Link>  
                             <Divider>Topics</Divider>
+                            
                             {path.topics?.map((topic, index ) => (
+                                <Card hoverable   >
                                         <p>{topic.title}</p>
+                                </Card>        
                             ))}
+                            
                         </Card>
     
                         </div>        
@@ -148,11 +139,19 @@ const Dash = () => {
                                 <Link to={`/path/${path._id}`}> <h1>{path.title}</h1> </Link> 
                                 <Divider>Topics</Divider>
                                 <div style={{ padding: '1rem', display:'flex', flexDirection:'column', width:'350px' }} >
-                                    {path.topics?.map((topic, index) => (
-                                        <Checkbox value={topic}>
-                                        <p>{topic.title}</p>
-                                        </Checkbox>
-                                    ))}
+                                    
+                                        {path.topics?.map((topic, index) => (
+                                            
+                                            <Card hoverable   >
+                                                <Checkbox value={topic}>
+                                                <Link to={`/topic/${topic._id}`}>
+                                                <p>{topic.title}</p>
+                                                </Link>
+                                                </Checkbox>
+                                            </Card> 
+                                           
+                                        ))}
+                                        
                                 </div>
                                 </Card>    
                                 </div>   

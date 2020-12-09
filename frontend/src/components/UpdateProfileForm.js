@@ -15,7 +15,6 @@ function UpdateProfileForm({
     _id, image
     }) {
     const [form] = Form.useForm()
-    const history = useHistory()
     //const [user, setUser] = useState()
     const [img, setImg] = useState(null)
     const [loading, setLoading] = useState(null)

@@ -4,11 +4,12 @@ const Path = require('../models/Path')
 
 
 exports.createTopic = async (req, res) => {
-    const { title, objective, duration, pathId } = req.body
+    const { title, objective, duration, content, pathId } = req.body
     const newTopic = await Topic.create({
         title,
         objective,
         duration,
+        content, 
         paths:pathId
     })
     await Path.findByIdAndUpdate(pathId, { $push: { topics: newTopic._id } })
@@ -23,9 +24,9 @@ exports.deleteTopic = async (req, res) => {
 
 exports.updateTopic = async (req, res) => {
     const { id } = req.params
-    const { title, objective, duration } = req.body
-    await Topic.findByIdAndUpdate(id, { title, objective, duration })
-    res.status(202).json({ messaje: 'Topic updated' })
+    const { title, objective, duration,content} = req.body
+    const upTopic =await Topic.findByIdAndUpdate(id, { title, objective, duration, content })
+    res.status(202).json(upTopic)
     }
 
 exports.getAllTopic = async (req, res) => {
