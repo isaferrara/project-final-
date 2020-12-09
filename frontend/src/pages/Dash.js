@@ -154,11 +154,13 @@ const Dash = () => {
                                 <div style={{ padding: '1rem', display:'flex', flexDirection:'column', width:'350px' }} >
                                     
                                         {path.topics?.map((topic, index) => (
+                                            <Link to={`/topic/${topic._id}`}>
                                             <Card hoverable   >
                                                 <Checkbox value={topic}>
                                                 <p>{topic.title}</p>
                                                 </Checkbox>
                                             </Card> 
+                                            </Link>
                                         ))}
                                         
                                 </div>

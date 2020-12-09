@@ -1,132 +1,125 @@
 import React, {useState, useEffect} from 'react'
-import { Typography, Skeleton, Divider, Card, Upload, Button, Modal, Form, Input, Space} from 'antd'
+import ReactPlayer from 'react-player/youtube'
+
+//ants
+import { Typography, Skeleton, Divider, Card, Upload, Button, Modal,Form, Input, Space} from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { useContextInfo } from '../hooks/context'
+
+//services
 import {  getSingleTopic, updateTopic} from '../services/topics.js'
-import { UploadOutlined, InboxOutlined, FontSizeOutlined } from '@ant-design/icons';
 
-
-
-const normFile = e => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
+//components
+import TextContent from '../components/TextContent'
+import LinkContent from '../components/LinkContent'
+import ImgContent from '../components/ImgContent'
 
 
 
 export const ContentTopic = (props) => {
+
+    //GENERAL
     const [form] = Form.useForm()
-    const [contenty, setContent] = useState(props)
-    const [pathsy, setPath] = useState(props)
     const [changes, setChanges] = useState(false)
+
+    //TOPICS OR PATHS
+    const [pathsy, setPath] = useState(props)
+    const [content, setContents] = useState([])
+
+    //CONTENT, LINKS OR IMG
+    const [contenty, setContent] = useState(null)
+    const [video, setVideo] = useState(null)
+    const [img, setImg] = useState(null)
+
+    //SET FORMS//
+    const [contentForm, setContentForm] = useState(false)
+    const [imgForm, setImgForm] = useState(false)
+    const [linkForm, setLinkForm]=useState(false)
+
+    let allInfo=[]
 
     useEffect(() => {
         async function getInfoTopic() {
             const {data} = await getSingleTopic(props.match.params.id)
-            setContent(data) 
+            !data.content? setContent('h'): setContent(data.content)
+            setContent(data)
          }
         getInfoTopic()
         }, [changes])
 
-    const onFinish = async values => {
+
         
-        for(let i=0; i< values.textContent.length; i++){
-            
-            let prevContent=contenty.content
-            // console.log(prevContent, 'prev')
-            let newContent=values.textContent[i].first
-            console.log(newContent, 'new')
-            let accTopics=[...prevContent ,'', ...newContent]
-            // console.log(accTopics, 'all')
-            
+    const onFinish = value => {
+        setContentForm(false) 
+        setLinkForm(false) 
+        setImgForm(false) 
+        form.resetFields()
+
+        value.text? setContents(content.concat(value.text)) : setContent(contenty)
+       value.link? setContents(content.concat(<ReactPlayer url={value.link} />)) : setContent(contenty) 
+
+       // setImg(content.concat(<ContentForm value={value.link}/>));
+
+        async function topicContent () {
             const {data}= await updateTopic(props.match.params.id, {
-            title: contenty.title,
-            objective: contenty.objective,
-            duration: contenty.duration,
-            content:accTopics,
-
-            })
-         setChanges (true)
-        setContent(data) 
-
-    console.log('Received values of form:', data);
+                title: contenty.title,
+                objective: contenty.objective,
+                duration: contenty.duration,
+                content:content,
+                })
+            setContent(data) 
         }
-    }
 
+    topicContent () 
+    setChanges (true)
+    };
+
+
+    function setContentForms(){
+        setContentForm(!contentForm)
+        }
+
+    function setLinkForms(){
+        setLinkForm(!linkForm)
+         }
+    function setImgsForms(){
+        setImgForm(!imgForm)
+    }
 
     return (
         <div>
-        <h1> </h1>
-        <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
+            <Form onFinish={onFinish} form={form}>
+                <div style={{display:'flex', flexDirection:'row'}}>
 
+                {/* BUTTONS */}
 
-        {/* insert text */}
-            <Form.List name="textContent">
-                {(fields, { add, remove }) => (
-                <>
-                <div style={{border:'lightgray 1px dashed', padding:'10px', display:'flex', justifyContent:'space-between'}}>
-                <Form.Item>
-                    <Button  style={{width:'20vh',height:'15vh'}} type="dashed" onClick={() => add()} icon={<PlusOutlined />}>
-                    <FontSizeOutlined />
+                <Form.Item name="text" >
+                    <Button  onClick={setContentForms} style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
                         Add text
                     </Button>
                 </Form.Item>
 
-            {/* drag image */}
-                <Form.Item style={{width:'20vh',height:'15vh'}}>
-                    <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
-                    <Upload.Dragger name="files" action="/upload.do">
-                        <p className="ant-upload-drag-icon">
-                        <InboxOutlined />
-                        </p>
-                        <p >Click or drag file to this area to upload</p>
-                    </Upload.Dragger>
-                    </Form.Item>
+                <Form.Item name="text" >
+                    <Button onClick={setLinkForms}  style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
+                        Add link
+                    </Button>
                 </Form.Item>
 
-
-                {/* Video */}
-                <Form.Item>
-                <Button style={{width:'20vh',height:'15vh'}} type="dashed" onClick={() => add()} icon={<PlusOutlined />}>
-                    Add Link
-                </Button>
+                <Form.Item name="text" >
+                    <Button onClick={setImgsForms} style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
+                        Add img
+                    </Button>
                 </Form.Item>
+                
+             </div>
 
-
-                </div>
-                {fields.map(field => (
-                <Space key={field.key} style={{ display: 'flex', justifyContent:'center', marginBottom: 8 }} align="baseline">
-                    <Form.Item
-                    {...field}
-                    name={[field.name, 'first']}
-                    fieldKey={[field.fieldKey, 'first']}
-                    rules={[{ required: true, message: 'Missing first name' }]}
-                    style={{width:'80vh'}}
-                    >
-                    <Input.TextArea placeholder="First Name" />
-                    </Form.Item>
-                    <MinusCircleOutlined onClick={() => remove(field.name)} />
-                </Space>
-                ))}
-
-            </>
-            )}
-        </Form.List>
-        <Form.Item style={{ marginTop: '10px'}}>
-            <Button type="primary" htmlType="submit">
-            Submit
-            </Button>
-        </Form.Item>
+                {/* SHOW FORMS */}
+                {contentForm && <TextContent {...contenty} /> }
+                {linkForm && <LinkContent {...video} /> }
+                {imgForm && <ImgContent {...img} /> }
         </Form>
+                {content}
 
-        <div style={{ display: 'flex', justifyContent:'left', marginTop: '10px'}}>
-           <p>{contenty.content}</p>         
-
-
-        </div>
+               
         </div>
     )
 }

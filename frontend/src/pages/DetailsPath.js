@@ -82,13 +82,15 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
     <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>        
         <div style={{display:'flex', flexDirection:'column', textAlign:'left', marginLeft: '40px'}}>
         <p style={{marginBottom:'3px'}} > 
+
         <b>Objective:</b> 
-        {topic.objective}</p>
-        <p>{topic._id}</p>
-        <p style={{marginBottom:'3px', paddingLeft:'0px'}} > 
+            {topic.objective}</p>
+            <p>{topic._id}</p>
+            <p style={{marginBottom:'3px', paddingLeft:'0px'}} > 
+
         <b>Duration:</b>
         {topic.duration}</p>
-        </div>
+    </div>
 
             <div>
             <Button type="ghost" onClick={ async ()=> {
