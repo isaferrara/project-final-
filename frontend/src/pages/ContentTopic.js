@@ -21,13 +21,14 @@ export const ContentTopic = (props) => {
     const [form] = Form.useForm()
     const [changes, setChanges] = useState(false)
 
-    //TOPICS OR PATHS
-    const [pathsy, setPath] = useState(props)
+    //TOPICS CONTENT INFO
+    //shows content on screen
     const [content, setContents] = useState([])
-    // const [allInfo, setAllInfo] = useState([])
 
+   //saves content on database
+    const [allInfo, setAllInfo] = useState([])
 
-    //all paths data
+    // paths data
     const [contenty, setContent] = useState(null)
 
     //CONTENT, LINKS OR IMG
@@ -40,55 +41,57 @@ export const ContentTopic = (props) => {
     const [imgForm, setImgForm] = useState(false)
     const [linkForm, setLinkForm]=useState(false)
 
-    let allInfo=[]
 
     useEffect(() => {
         async function getInfoTopic() {
             const {data} = await getSingleTopic(props.match.params.id)
-            // !data.content? setContent('h'): setContent(data.content)
             setContent(data)
+            setAllInfo(data.content)
             setContents(data.content)
 
+            let arr=[]
+            for(let i=0; i<allInfo.length; i++){
+                if(allInfo[i].slice(0, 8)==='https://'){
+                    arr.push(<ReactPlayer url={allInfo[i]} />)
+                }else{
+                    arr.push(allInfo[i])
+                }
+            }
+            setContents(arr)
+            console.log(content)   
+
+  // console.log(data)
          }
         getInfoTopic()
         }, [changes])
 
-
         
-    const onFinish = value => {
-        console.log(value)
-
-        value.text ? setContents(content.concat(value.text)) : setContent(contenty)
-        let accumText =value.text ? [...content, value.text]  : setContent(contenty)
-        setContents(accumText)
-
-
-        
-         value.link? setContents(content.concat(<ReactPlayer url={value.link} />)) : setContent(contenty) 
-         value.link? setContents([...content, <ReactPlayer url={value.link} />]) :  setContent(contenty) 
-        console.log(<ReactPlayer url={value.link}/>)
-
-    //    let complete= value.txt? setContents(allTxt): value.link? setContents(allVideos): setContent(contenty) 
- 
-    //    console.log(complete)
-
-       // setImg(content.concat(<ContentForm value={value.link}/>));
+    const onFinish =  value => {
+        if(value.text){
+            console.log('si es texto')
+             setContents([...content, value.text])
+             setAllInfo([...allInfo, value.text])
+            console.log(allInfo, 'allinfo')
+        }else{
+            setContents([...content, <ReactPlayer url={value.link} />])
+            setAllInfo([...content, value.link])
+        }
 
         async function topicContent () {
             const {data}= await updateTopic(props.match.params.id, {
                 title: contenty.title,
                 objective: contenty.objective,
                 duration: contenty.duration,
-                content:content,
+                content:allInfo,
                 })
             setContent(data) 
-
         }
+
+       topicContent () 
         setContentForm(false) 
         setLinkForm(false) 
         setImgForm(false) 
         form.resetFields()
-        topicContent () 
         setChanges (true)
     };
 
@@ -105,7 +108,9 @@ export const ContentTopic = (props) => {
     }
 
     return (
-        <div>
+        <div style={{display:'flex', flexDirection:'column'}}>
+        {contenty?(
+            <div style={{width:'80vh'}}> 
             <Form onFinish={onFinish} form={form}>
                 <div style={{display:'flex', flexDirection:'row'}}>
 
@@ -128,7 +133,7 @@ export const ContentTopic = (props) => {
                         Add img
                     </Button>
                 </Form.Item>
-                
+                {/* <Button onClick={saveChanges}> Save</Button> */}
              </div>
 
                 {/* SHOW FORMS */}
@@ -136,7 +141,17 @@ export const ContentTopic = (props) => {
                 {linkForm && <LinkContent {...video} /> }
                 {imgForm && <ImgContent {...img} /> }
         </Form>
+        <h1>{contenty.title}</h1>
+            <div style={{display:'flex', justifyContent:'left', flexDirection:'column'}}>
+            <p><b>Objective:</b> {contenty.objective}</p>
+            <p><b>Duration:</b>  {contenty.duration}</p>
+        </div>
+            <Divider></Divider>
                 {content}
+
+            </div>):(
+                <Skeleton active />
+            )}
 
                
         </div>

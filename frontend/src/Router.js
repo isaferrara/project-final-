@@ -40,23 +40,23 @@ const Router = () => {
       <LayoutApp>
       <Route exact path="/" component={Home} />
       <Route exact path="/dash/:id" component={Dash} />
-      <Route component={NotFound} />
       <Route path='/path/create' component={CreatePath} exact />
       <Route path='/path/:id' component={DetailsPath} exact />
       <Route path='/topic/:id' component={ContentTopic} exact />
       <Route path='/login' component={Login} exact/>
       <Route path='/signup' component={Signup} exact/>
-      <PrivateRoute path='/profile' component={Profile}exact />
-      <Route path='/multimedia' component={Multimedia}exact />
+      <PrivateRoute path='/profile' component={Profile} exact />
+      <Route path='/multimedia' component={Multimedia} exact />
       <Route path='/choose-donation' component={ChooseDonation}exact />
-      <Route path='/donate100' component={Donate100}exact />
-      <Route path='/donate200' component={Donate200}exact />
-      <Route path='/donate300' component={Donate300}exact />
-      <Route path='/donate400' component={Donate400}exact />
-      <Route path='/progreso' component={Progreso}exact />
+      <Route path='/donate100' component={Donate100} exact />
+      <Route path='/donate200' component={Donate200} exact />
+      <Route path='/donate300' component={Donate300} exact />
+      <Route path='/donate400' component={Donate400} exact />
+      <Route path='/progreso' component={Progreso} exact />
       <Route exact path="/success" component={Success} />
       <Route exact path="/failure" component={Failure} />
       <Route exact path="/pending" component={Pending} />
+      <Route component={NotFound} />
     {/*<Route component={NotFound} />*/}
       </LayoutApp>
     </BrowserRouter>
