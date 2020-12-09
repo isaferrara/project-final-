@@ -52,7 +52,7 @@ function Donate100() {
     <div>
       <h1>Donate</h1>
       <p>{product?.unit_price}</p>
-      <pre>{JSON.stringify(product, null, 2)}</pre>
+      {/*<pre>{JSON.stringify(product, null, 2)}</pre>*/}
       {/* asignamos la referencia al elemento que queremos que contenga el boton de mercadopago (que lo trae nuestro script) */}
       <div ref={paymentContainereRef}></div>
     </div>

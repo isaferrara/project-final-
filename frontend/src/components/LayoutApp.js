@@ -56,7 +56,7 @@ const LayoutApp = ({ children }) => {
         </Menu>
       </Header>
       <br />
-      <Content style={{  padding: '0 50px', height: 'calc(100vh - 153.6px)' }}>
+      <Content >
         <div className="site-layout-content">{children}</div>
       </Content>
     </Layout>
