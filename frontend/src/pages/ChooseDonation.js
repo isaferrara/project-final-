@@ -11,7 +11,7 @@ function onPressEnter(value) {
 }
 
 return (<div>
-    PreDonate<br/>
+    Please choose the amount<br/>
     <Button type="link" href="/donate100">100</Button>
     <Button type="link" href="/donate200">200</Button>
     <Button type="link" href="/donate300">300</Button>
