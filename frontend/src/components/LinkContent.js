@@ -1,20 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import { Typography, Skeleton, Divider, Card, Upload, Button, Modal,Form, Input, Space} from 'antd'
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import React, {useState} from 'react'
+import {  Skeleton, Button,Form, Input} from 'antd'
 import ReactPlayer from 'react-player/youtube'
-import axios from 'axios'
-import {  getSingleTopic, updateTopic} from '../services/topics.js'
-import { UploadOutlined, InboxOutlined, FontSizeOutlined } from '@ant-design/icons';
 
-const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/djjro5m0g/image/upload' 
 
 export const LinkContent = (props) => {
-    const [form] = Form.useForm()
-    const [contenty, setContent] = useState(props)
-    const [video, setVideo] = useState(null)
-    const [pathsy, setPath] = useState(props)
-    const [changes, setChanges] = useState(false)
 
+    const [contenty, setContent] = useState(props)
 
     return (
         <div>

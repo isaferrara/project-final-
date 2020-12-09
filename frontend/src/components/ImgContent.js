@@ -1,31 +1,36 @@
-import React, {useState, useEffect} from 'react'
-import { Typography, Skeleton, Divider, Card, Upload, Button, Modal,Form, Input, Space} from 'antd'
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import ReactPlayer from 'react-player/youtube'
+import React, {useState} from 'react'
+import { Skeleton, Upload, Button,Form} from 'antd'
 import axios from 'axios'
-import {  getSingleTopic, updateTopic} from '../services/topics.js'
-import { UploadOutlined, InboxOutlined, FontSizeOutlined } from '@ant-design/icons';
+import { UploadOutlined} from '@ant-design/icons';
 
 const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/djjro5m0g/image/upload' 
 
 export const ImgContent = (props) => {
-    const [form] = Form.useForm()
     const [contenty, setContent] = useState(props)
- 
+    const [img, setImg] = useState(null)
+    const [loading, setLoading] = useState(null)
 
-    const normFile =  e => {
-        if (Array.isArray(e)) {
-          return e;
-        }
-        return e && e.fileList;
+    async function handleUploadFile(file){
+        console.log(file)
+
+        setLoading(true)
+        const data = new FormData()
+    
+        data.append('file', file)
+        data.append('upload_preset', 'project-final-')
+    
+        const {data: {secure_url}} = await axios.post(cloudinaryAPI, data)
+    
+        setImg(secure_url)
+        setLoading(false)
         };
     
     return (
         <div>
         {contenty?
         (<div>
-                    <Form.Item name="upload" valuePropName="fileList" getValueFromEvent={normFile} style={{ marginLeft:'30px' }} >
-                        <Upload name="logo" action="/upload.do" listType="picture">
+                    <Form.Item name="upload" valuePropName="fileList" style={{ marginLeft:'30px' }} >
+                        <Upload name="image"  showUploadList={false} listType="picture" beforeUpload={handleUploadFile}>
                         <Button icon={<UploadOutlined />}> Upload image</Button>
                         </Upload>
                     </Form.Item>

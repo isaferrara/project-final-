@@ -1,24 +1,11 @@
 import React, {useState, useEffect}from 'react'
-import { getAllPaths, getSinglePath, updatePath} from '../services/paths.js'
-import { getSingleTopic, getAllTopic} from '../services/topics.js'
+import { getAllPaths, updatePath} from '../services/paths.js'
 import { Checkbox, Button, Modal, Form,  Card, Divider} from 'antd'
 import { Link } from 'react-router-dom'
 import { useContextInfo } from '../hooks/context'
 import { Input } from 'antd';
-import { AudioOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
-
-const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: '#1890ff',
-      }}
-    />
-  );
-
-
 
 const Dash = () => {
     const { user } = useContextInfo()
@@ -38,7 +25,7 @@ const Dash = () => {
                 info.users[0]===user._id
             )
             //get recommended paths--users starts with all existing paths//
-            const interestPaths = data.filter((info)=>
+            data.filter((info)=>
             info.users[0]===user._id
         )
             setOtherPaths(data)
@@ -83,7 +70,7 @@ const Dash = () => {
                     console.log(newTopics, 'selected topics')
 
 
-                    const {data} =await updatePath(idPath, 
+                    await updatePath(idPath, 
                         {title: values['checkbox-group'][i].title,
                         description: values['checkbox-group'][i].description,
                         category:values['checkbox-group'][i].category,
@@ -154,13 +141,15 @@ const Dash = () => {
                                 <div style={{ padding: '1rem', display:'flex', flexDirection:'column', width:'350px' }} >
                                     
                                         {path.topics?.map((topic, index) => (
-                                            <Link to={`/topic/${topic._id}`}>
+                                            
                                             <Card hoverable   >
                                                 <Checkbox value={topic}>
+                                                <Link to={`/topic/${topic._id}`}>
                                                 <p>{topic.title}</p>
+                                                </Link>
                                                 </Checkbox>
                                             </Card> 
-                                            </Link>
+                                           
                                         ))}
                                         
                                 </div>

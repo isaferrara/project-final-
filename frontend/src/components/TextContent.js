@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { Skeleton, Button, Form, Input, } from 'antd'
-import {  getSingleTopic, updateTopic} from '../services/topics.js'
 
 
 export const TextContent = (props) => {
+    const { TextArea } = Input;
     const [form] = Form.useForm()
     const [contenty, setContent] = useState(props)
 
@@ -12,7 +12,7 @@ export const TextContent = (props) => {
         {contenty?
             (<div>
                 <Form.Item name='text'>
-                <Input.TextArea placeholder="Write something" bordered={false} style={{ backgroundColor:'white' }} />
+                <TextArea  rows={8}  placeholder="Write something" bordered={false} style={{ backgroundColor:'white' }} />
                 </Form.Item>
             
            {/* SUBMIT BUTTON */}

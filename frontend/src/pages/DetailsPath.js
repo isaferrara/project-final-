@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { useContextInfo } from '../hooks/context'
-import { getSinglePath, deletePath, updatePath } from '../services/paths.js'
+import { getSinglePath, deletePath } from '../services/paths.js'
 import {  deleteTopic, createTopic} from '../services/topics.js'
-import { Typography, Skeleton, Divider, Card, Button, Modal, Form, Input} from 'antd'
+import { Skeleton, Divider, Card, Button, Modal, Form, Input} from 'antd'
 import EditPath from '../components/EditPath'
 import PathInfo from '../components/PathInfo'
 import { Link } from 'react-router-dom'
 
-const { Title } = Typography
 
 const DetailsPath = ({ match: { params: { id } }, history }) => {
     const [form] = Form.useForm()

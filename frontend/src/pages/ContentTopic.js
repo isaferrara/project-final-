@@ -24,9 +24,14 @@ export const ContentTopic = (props) => {
     //TOPICS OR PATHS
     const [pathsy, setPath] = useState(props)
     const [content, setContents] = useState([])
+    // const [allInfo, setAllInfo] = useState([])
+
+
+    //all paths data
+    const [contenty, setContent] = useState(null)
 
     //CONTENT, LINKS OR IMG
-    const [contenty, setContent] = useState(null)
+    const [txt, setTxt] = useState(null)
     const [video, setVideo] = useState(null)
     const [img, setImg] = useState(null)
 
@@ -40,8 +45,10 @@ export const ContentTopic = (props) => {
     useEffect(() => {
         async function getInfoTopic() {
             const {data} = await getSingleTopic(props.match.params.id)
-            !data.content? setContent('h'): setContent(data.content)
+            // !data.content? setContent('h'): setContent(data.content)
             setContent(data)
+            setContents(data.content)
+
          }
         getInfoTopic()
         }, [changes])
@@ -49,13 +56,21 @@ export const ContentTopic = (props) => {
 
         
     const onFinish = value => {
-        setContentForm(false) 
-        setLinkForm(false) 
-        setImgForm(false) 
-        form.resetFields()
+        console.log(value)
 
-        value.text? setContents(content.concat(value.text)) : setContent(contenty)
-       value.link? setContents(content.concat(<ReactPlayer url={value.link} />)) : setContent(contenty) 
+        value.text ? setContents(content.concat(value.text)) : setContent(contenty)
+        let accumText =value.text ? [...content, value.text]  : setContent(contenty)
+        setContents(accumText)
+
+
+        
+         value.link? setContents(content.concat(<ReactPlayer url={value.link} />)) : setContent(contenty) 
+         value.link? setContents([...content, <ReactPlayer url={value.link} />]) :  setContent(contenty) 
+        console.log(<ReactPlayer url={value.link}/>)
+
+    //    let complete= value.txt? setContents(allTxt): value.link? setContents(allVideos): setContent(contenty) 
+ 
+    //    console.log(complete)
 
        // setImg(content.concat(<ContentForm value={value.link}/>));
 
@@ -67,10 +82,14 @@ export const ContentTopic = (props) => {
                 content:content,
                 })
             setContent(data) 
-        }
 
-    topicContent () 
-    setChanges (true)
+        }
+        setContentForm(false) 
+        setLinkForm(false) 
+        setImgForm(false) 
+        form.resetFields()
+        topicContent () 
+        setChanges (true)
     };
 
 
