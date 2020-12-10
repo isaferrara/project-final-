@@ -2,6 +2,7 @@ import React from 'react'
 import { Row, Col, Form, Input, Button, Typography, Divider,message } from 'antd'
 import { loginFn, profile } from '../services/auth'
 import { useContextInfo } from '../hooks/context'
+import authLayout from '../components/authLayout'
 
 const { Title } = Typography
 
@@ -29,20 +30,23 @@ const Login = ({ history }) => {
     }
   }
   return (
+    <div style={{background: '#004a6e', width: '100%', height:'800px', paddingTop:'0'}}>
+    <div style={{ padding: '100px 304px'}}>
+    <div style={{padding: '50px', background: 'white', borderRadius: '20px', background: '#F8F8F8'}}> 
     <Row>
       <Col span={24}>
-        <Title level={1}>Login to empower your skills!</Title>
+        <Title level={1} style={{color:'gray'}}>Login to empower your skills!</Title>
       </Col>
       <Divider />
       <Col span={24}>
-        <Form layout="vertical" form={form} onFinish={handleSubmit}>
-          <Form.Item name='username' label="Username:">
-            <Input />
+        <Form layout="vertical" form={form} onFinish={handleSubmit}  style={{ borderRadius: '20px'}}>
+          <Form.Item name='username' label="Username:" style={{color:'gray'}}>
+            <Input  style={{ borderRadius: '20px', background:'white'}}/>
           </Form.Item>
-          <Form.Item name='password' label="Password:">
-            <Input.Password />
+          <Form.Item name='password' label="Password:" style={{color:'gray'}}>
+            <Input.Password  />
           </Form.Item>
-          <Button type="primary" block htmlType="submit">
+          <Button type="primary" block htmlType="submit" style={{color:'white'}}>
             Login
           </Button>
         </Form>
@@ -54,6 +58,9 @@ const Login = ({ history }) => {
         </a>
       </Col>
     </Row>
+    </div>
+  </div>
+  </div>
   )
 }
 

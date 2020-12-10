@@ -5,6 +5,7 @@ import { useContextInfo } from '../hooks/context'
 import { Redirect } from 'react-router-dom'
 import UpdateProfileForm from '../components/UpdateProfileForm'
 import { currentUserFn } from '../services/auth'
+import LayoutDash from "../components/LayoutDash";
 
 //traer login y currentuser y hacer useEffect
 
@@ -12,7 +13,8 @@ const Profile = () => {
   //const { user } = useContextInfo()
   const [showEditForm, setShowEditForm] = useState(false)
   const [user, setUser] = useState(null)
-   
+  const [disable, setDisable] = useState(false)
+
   const login = user => setUser(user)
 
 
@@ -34,24 +36,40 @@ const Profile = () => {
 
 
   return user ? (
+    <div style={{ height:'100%', width:'100%', position:'fixed', padding:'0', margin:'0', top:'0', left:'0' }}>
+    <LayoutDash >
     <Row>
       <Col xs={24} sm={24} md={12}>
+      <div style={{display:'flex', flexDirection:'row'}}>
+      <div style={{marginRight:'50px', marginLeft: '30px', width:'100px'}}>
+      <div style={{width: 300, marginTop: '30px'}}>
         <Typography.Title level={3}>
           Your account
+        </Typography.Title>
           {console.log(user.image, user.email)} 
           <br/>
-          <br/>
-          <img style={{width: 200, height: 200, borderRadius: 50}} src={user.image} alt="User Img"></img>
-          <br/>
-          Username and/or email:
-          <br/>
-          {user.username}
-          <br/>
-          {user.name}
-          <br/>
-          {user.email}
+          <img style={{width: 200, height: 200, borderRadius: 30}} src={user.image} alt="User Img"></img>
           
-          {showEditForm && <UpdateProfileForm {...user} />}
+
+          <h4><b>Username:</b>
+            {user.username}
+          <br/>
+          </h4>
+
+          <h4> <b>Email:</b>
+            {user.email}
+          </h4>
+
+          <h4><b>Full name:</b>
+            {user.name}
+          </h4>
+          <br/>
+          </div>
+        </div>
+        <div style={{width:'700px', marginLeft: '170px'}}>
+          { !disable && <UpdateProfileForm {...user} />}
+         </div>
+         </div>
         <br />
         <Button
           type="primary"
@@ -59,9 +77,12 @@ const Profile = () => {
           block>Edit Profile</Button>
         <br />
 
-        </Typography.Title>
+
       </Col>
-    </Row>) :
+    </Row>
+    </LayoutDash>
+    </div>
+    ) :
     <Redirect to='/profile' />
 
 }

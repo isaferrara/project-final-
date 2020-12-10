@@ -16,8 +16,9 @@ const LayoutApp = ({ children }) => {
 
   return (
     <Layout className="layout">
-      <Header>
-        <div className="logo" />
+    <div >
+      <Header className="header" style={{paddingLeft:'200px'}}>
+        <div className="logo" style={{display:'flex', justifyContent:'right'}}/>
         <Menu theme="dark" mode="horizontal">
           <Menu.Item key="1">
             <Link to="/">
@@ -56,9 +57,10 @@ const LayoutApp = ({ children }) => {
         </Menu>
       </Header>
       <br />
-      <Content style={{  padding: '0 50px', height: 'calc(100vh - 153.6px)' }}>
+      <Content >
         <div className="site-layout-content">{children}</div>
       </Content>
+      </div>
     </Layout>
   )
 }

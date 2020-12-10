@@ -1,6 +1,7 @@
 import React from 'react'
 import { createPath } from '../services/paths.js'
 import { createTopic } from '../services/topics.js'
+import LayoutDash from "../components/LayoutDash";
 
 
 
@@ -32,6 +33,7 @@ import {useContextInfo} from '../hooks/context'
         )
 
         const {_id}= data
+        path.topics? 
         await path.topics.map( topics=>{
             createTopic(
             {title:topics.title,
@@ -40,14 +42,15 @@ import {useContextInfo} from '../hooks/context'
             content: topics.content,
             pathId:_id
             })
-        })
+        }): path.topics=' '
         form.resetFields()
         props.history.push(`/dash/${path._id}`)
-        }
+        } 
 
 
     return (
         <div>
+         <LayoutDash >
             <Row>
         <Col span={24}>
         <h1>Add new path</h1> 
@@ -134,8 +137,6 @@ import {useContextInfo} from '../hooks/context'
             )}
         </Form.List>
 
-
-
                 <Button type="primary" block htmlType="submit">
                 Create
                 </Button>
@@ -143,6 +144,7 @@ import {useContextInfo} from '../hooks/context'
             </Form>
             </Col>
         </Row>
+        </LayoutDash>
         </div>
     )
 }

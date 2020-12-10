@@ -22,6 +22,7 @@ import Donate400 from './pages/Donate400'
 import Progreso from "./pages/Progreso"
 import ChooseDonation from './pages/ChooseDonation'
 import PrivateRoute from "./components/PrivateRoute"
+import PrivDash from "./components/PrivDash"
 
 
 ///Dummy Components
@@ -37,12 +38,12 @@ const Pending = () => <h1>Pending Payment</h1>
 const Router = () => {
   return (
     <BrowserRouter >
-      <LayoutApp>
+      
       <Route exact path="/" component={Home} />
-      <Route exact path="/dash/:id" component={Dash} />
-      <Route path='/path/create' component={CreatePath} exact />
-      <Route path='/path/:id' component={DetailsPath} exact />
-      <Route path='/topic/:id' component={ContentTopic} exact />
+      <PrivDash exact path="/dash/:id" component={Dash} />
+      <PrivateRoute path='/path/create' component={CreatePath} exact />
+      <PrivateRoute path='/path/:id' component={DetailsPath} exact />
+      <PrivateRoute path='/topic/:id' component={ContentTopic} exact />
       <Route path='/login' component={Login} exact/>
       <Route path='/signup' component={Signup} exact/>
       <PrivateRoute path='/profile' component={Profile} exact />
@@ -56,9 +57,8 @@ const Router = () => {
       <Route exact path="/success" component={Success} />
       <Route exact path="/failure" component={Failure} />
       <Route exact path="/pending" component={Pending} />
-      <Route component={NotFound} />
+            <Route component={NotFound} />
     {/*<Route component={NotFound} />*/}
-      </LayoutApp>
     </BrowserRouter>
   )
 }

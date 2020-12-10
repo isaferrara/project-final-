@@ -3,7 +3,6 @@ import {useState} from 'react'
 import { Form, Input, Button, Upload } from 'antd'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { updateFn } from '../services/auth'
-import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/djjro5m0g/image/upload' 
@@ -18,20 +17,12 @@ function UpdateProfileForm({
     //const [user, setUser] = useState()
     const [img, setImg] = useState(null)
     const [loading, setLoading] = useState(null)
+    const [disable, setDisable] = useState(true)
 
     async function handleSubmit(values) {
-        //await updateFn(_id, values)
-        //setUser(values)
-        //console.log(values)
-        //history.push('/')
-
         const updatedUsr = {...values, image: img}
         const {data: newUpdatedUsr} = await updateFn(_id, updatedUsr)
         console.log(newUpdatedUsr)
-    //const usr = {...userInput, image: img}
-    //const {data : newUsr} = await signupFn(usr)
-    //console.log(newUsr)
-    //history.push('/login')
     }
 
     async function handleUploadFile(file){
@@ -48,6 +39,10 @@ function UpdateProfileForm({
         setLoading(false)
     }
 
+    function disabled(){
+        setDisable(!disable)
+    }
+
     const uploadButton = (
         <div>
             {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -56,19 +51,19 @@ function UpdateProfileForm({
     );
 
     return (
-        <Form form={form} layout="vertical" onFinish={handleSubmit} initialValues={{
+        <Form form={form} style={{marginLeft:'150px', width: '350px'}} layout="vertical" onFinish={handleSubmit} initialValues={{
         username,
         name,
         email, image
         }}>
         <Form.Item name="username" label="Username:">
-            <Input />
+            <Input disabled={disabled} />
         </Form.Item>
         <Form.Item name="email" label="Email:">
-            <Input />
+            <Input disabled={disabled}/>
         </Form.Item>
         <Form.Item name="name" label="Name:">
-            <Input />
+            <Input disabled={disabled}/>
         </Form.Item>
         <Form.Item name='image' label="Image:" >
             <Upload 
@@ -80,7 +75,7 @@ function UpdateProfileForm({
                 {img ? <img src={img} style={{width : '100%'}} /> : uploadButton}
             </Upload>  
         </Form.Item>
-        <Button block type="primary" htmlType="submit">
+        <Button  type="primary" htmlType="submit">
             Update
         </Button>
         </Form>

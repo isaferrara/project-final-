@@ -6,6 +6,7 @@ import { Skeleton, Divider, Card, Button, Modal, Form, Input} from 'antd'
 import EditPath from '../components/EditPath'
 import PathInfo from '../components/PathInfo'
 import { Link } from 'react-router-dom'
+import LayoutDash from "../components/LayoutDash";
 
 
 const DetailsPath = ({ match: { params: { id } }, history }) => {
@@ -65,14 +66,16 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
 
 
     return (
-<div style={{ padding: '1rem 3rem' }}>
-    {pathsy? (<div>
-        {showInfo && <PathInfo {...pathsy} setForms={setForms} /> }
-        <br />
+        <LayoutDash>
+        <div style={{ padding: '1rem 3rem' }}>
+            {pathsy? (<div>
+                {showInfo && <PathInfo {...pathsy} setForms={setForms} /> }
+                <br />
         {showEditForm && <EditPath {...pathsy} setForms={setForms}/>}
 
     <Divider>Topics</Divider>
-    <Button type="ghost" onClick={showModal} block >Add Topic</Button>
+    <Button type="primary" onClick={showModal} block >Add Topic</Button>
+    <br />
     
     {pathsy.topics.map((topic, i) => 
         <Link to={`/topic/${topic._id}`}>
@@ -80,11 +83,10 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
     
     <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>        
         <div style={{display:'flex', flexDirection:'column', textAlign:'left', marginLeft: '40px'}}>
-        <p style={{marginBottom:'3px'}} > 
+        <p style={{marginBottom:'3px', marginTop:'5px'}} > 
 
         <b>Objective:</b> 
             {topic.objective}</p>
-            <p>{topic._id}</p>
             <p style={{marginBottom:'3px', paddingLeft:'0px'}} > 
 
         <b>Duration:</b>
@@ -130,12 +132,13 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
             
         </Form>
             </Modal>
-        
+    
     </div>
     ) : (
           <Skeleton active />
         )}
     </div>
+    </LayoutDash>
     )
 }
 

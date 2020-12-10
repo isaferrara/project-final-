@@ -12,6 +12,7 @@ import {  getSingleTopic, updateTopic} from '../services/topics.js'
 import TextContent from '../components/TextContent'
 import LinkContent from '../components/LinkContent'
 import ImgContent from '../components/ImgContent'
+import LayoutDash from "../components/LayoutDash";
 
 
 
@@ -25,11 +26,11 @@ export const ContentTopic = (props) => {
     //shows content on screen
     const [content, setContents] = useState([])
 
-   //saves content on database
-    const [allInfo, setAllInfo] = useState([])
-
     // paths data
     const [contenty, setContent] = useState(null)
+
+       //saves content on database
+       const [allInfo, setAllInfo] = useState([])
 
     //CONTENT, LINKS OR IMG
     const [txt, setTxt] = useState(null)
@@ -43,118 +44,128 @@ export const ContentTopic = (props) => {
 
 
     useEffect(() => {
-        async function getInfoTopic() {
-            const {data} = await getSingleTopic(props.match.params.id)
-            setContent(data)
-            setAllInfo(data.content)
-            setContents(data.content)
-
-            let arr=[]
-            for(let i=0; i<allInfo.length; i++){
-                if(allInfo[i].slice(0, 8)==='https://'){
-                    arr.push(<ReactPlayer url={allInfo[i]} />)
-                }else{
-                    arr.push(allInfo[i])
-                }
-            }
-            setContents(arr)
-            console.log(content)   
-
-  // console.log(data)
-         }
-        getInfoTopic()
-        }, [changes])
-
+                async function getInfoTopic() {
+                    const {data} = await getSingleTopic(props.match.params.id)
+                    setContent(data)
+                    setAllInfo(data.content)
+                    setContents(data.content)
+                    console.log(data, '1')
         
-    const onFinish =  value => {
-        if(value.text){
-            console.log('si es texto')
-             setContents([...content, value.text])
-             setAllInfo([...allInfo, value.text])
-            console.log(allInfo, 'allinfo')
-        }else{
-            setContents([...content, <ReactPlayer url={value.link} />])
-            setAllInfo([...content, value.link])
+                    let arr=[]
+                    for(let i=0; i<data.content.length; i++){
+                        console.log('2')
+                        if(data.content[i].slice(0, 8)==='https://'){
+                            arr.push(<ReactPlayer url={data.content[i]} />)
+                        }else{
+                            arr.push(data.content[i])
+                        }
+                    }
+                    setContents(arr)
+                     console.log(data, '3')
+                 }
+                getInfoTopic()
+                }, [changes])
+        
+                
+            const onFinish =  value => {
+                let contentArray= []
+                let allInfoArray= []
+                async function topicContent () {
+                console.log(value, 'value')
+                    if(value.text){
+                        contentArray=[...content, value.text]
+                        allInfoArray=[...allInfo, value.text]
+
+                    }else{
+                        contentArray=[...content, <ReactPlayer url={value.link} />]
+                        allInfoArray=[...allInfo, value.link]
+                    }
+                    
+                    setContents(contentArray)
+                    console.log(content, 'csetcontent')
+                    
+                    setAllInfo(allInfoArray)
+                    console.log(allInfo, 'setinfo')
+
+                    const {data}= await updateTopic(props.match.params.id, {
+                        title: contenty.title,
+                        objective: contenty.objective,
+                        duration: contenty.duration,
+                        content:allInfoArray,
+                        })
+                    setContent(data) 
+                    console.log(data, 'aaaa')
+                }
+        
+               topicContent () 
+                setContentForm(false) 
+                setLinkForm(false) 
+                setImgForm(false) 
+                form.resetFields()
+                setChanges (true)
+            };
+        
+        
+            function setContentForms(){
+                setContentForm(!contentForm)
+                }
+        
+            function setLinkForms(){
+                setLinkForm(!linkForm)
+                 }
+            function setImgsForms(){
+                setImgForm(!imgForm)
+            }
+        
+            return (
+                <div style={{display:'flex', flexDirection:'column'}}>
+                    <LayoutDash>
+                {contenty?(
+                    <div style={{width:'80vh'}}> 
+                    <Form onFinish={onFinish} form={form}>
+                        <div style={{display:'flex', flexDirection:'row'}}>
+        
+                        {/* BUTTONS */}
+        
+                        <Form.Item name="text" rules={[{ required: true, message: 'Please input your name!' }]}>
+                            <Button  onClick={setContentForms} style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
+                                Add text
+                            </Button>
+                        </Form.Item>
+        
+                        <Form.Item name="text" rules={[{ required: true, message: 'Please input your name!' }]}>
+                            <Button onClick={setLinkForms}  style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
+                                Add link
+                            </Button>
+                        </Form.Item>
+        
+                        <Form.Item name="text" rules={[{ required: true, message: 'Please input your name!' }]}>
+                            <Button onClick={setImgsForms} style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
+                                Add img
+                            </Button>
+                        </Form.Item>
+                        {/* <Button onClick={saveChanges}> Save</Button> */}
+                     </div>
+        
+                        {/* SHOW FORMS */}
+                        {contentForm && <TextContent {...contenty} /> }
+                        {linkForm && <LinkContent {...video} /> }
+                        {imgForm && <ImgContent {...img} /> }
+                </Form>
+                <h1>{contenty.title}</h1>
+                    <div style={{display:'flex', justifyContent:'left', flexDirection:'column'}}>
+                    <p><b>Objective:</b> {contenty.objective}</p>
+                    <p><b>Duration:</b>  {contenty.duration}</p>
+                </div>
+                    <Divider></Divider>
+                        {content && content }
+        
+                    </div>):(
+                        <Skeleton active />
+                    )}
+        
+                </LayoutDash>
+                </div>
+            )
         }
-
-        async function topicContent () {
-            const {data}= await updateTopic(props.match.params.id, {
-                title: contenty.title,
-                objective: contenty.objective,
-                duration: contenty.duration,
-                content:allInfo,
-                })
-            setContent(data) 
-        }
-
-       topicContent () 
-        setContentForm(false) 
-        setLinkForm(false) 
-        setImgForm(false) 
-        form.resetFields()
-        setChanges (true)
-    };
-
-
-    function setContentForms(){
-        setContentForm(!contentForm)
-        }
-
-    function setLinkForms(){
-        setLinkForm(!linkForm)
-         }
-    function setImgsForms(){
-        setImgForm(!imgForm)
-    }
-
-    return (
-        <div style={{display:'flex', flexDirection:'column'}}>
-        {contenty?(
-            <div style={{width:'80vh'}}> 
-            <Form onFinish={onFinish} form={form}>
-                <div style={{display:'flex', flexDirection:'row'}}>
-
-                {/* BUTTONS */}
-
-                <Form.Item name="text" >
-                    <Button  onClick={setContentForms} style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
-                        Add text
-                    </Button>
-                </Form.Item>
-
-                <Form.Item name="text" >
-                    <Button onClick={setLinkForms}  style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
-                        Add link
-                    </Button>
-                </Form.Item>
-
-                <Form.Item name="text" >
-                    <Button onClick={setImgsForms} style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
-                        Add img
-                    </Button>
-                </Form.Item>
-                {/* <Button onClick={saveChanges}> Save</Button> */}
-             </div>
-
-                {/* SHOW FORMS */}
-                {contentForm && <TextContent {...contenty} /> }
-                {linkForm && <LinkContent {...video} /> }
-                {imgForm && <ImgContent {...img} /> }
-        </Form>
-        <h1>{contenty.title}</h1>
-            <div style={{display:'flex', justifyContent:'left', flexDirection:'column'}}>
-            <p><b>Objective:</b> {contenty.objective}</p>
-            <p><b>Duration:</b>  {contenty.duration}</p>
-        </div>
-            <Divider></Divider>
-                {content}
-
-            </div>):(
-                <Skeleton active />
-            )}
-
-               
-        </div>
-    )
-}
-export default ContentTopic
+        export default ContentTopic

@@ -30,7 +30,7 @@ export const PathInfo = (props) => {
             <p><b>Description:</b>{pathsy.description}</p>
             <p> <b>Category:</b>{pathsy.category}</p>
         </div>
-        <Button type="primary" block onClick={changeSett}  >Edit Project</Button>
+        <Button type="ghost" block onClick={changeSett}  >Edit Project</Button>
         <br />
         </div>
         ):(

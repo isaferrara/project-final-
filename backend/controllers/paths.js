@@ -11,7 +11,7 @@ exports.createPath = async (req, res) => {
       users:userId
     })
 
-    await User.findByIdAndUpdate(userId, { $push: { users: newPath._id } })
+    await User.findByIdAndUpdate(userId, { $push: { users: newPath._id } },  {new:true})
     res.status(201).json( newPath)
     
   }
@@ -25,7 +25,7 @@ exports.createPath = async (req, res) => {
 exports.updatePath = async (req, res) => {
     const { id } = req.params
     const { title, description, category, topics } = req.body
-    const pathsy= await Path.findByIdAndUpdate(id, { title, description, category, topics })
+    const pathsy= await Path.findByIdAndUpdate(id, { title, description, category, topics }, {new:true})
     res.status(202).json(pathsy)
   }
 

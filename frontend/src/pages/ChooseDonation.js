@@ -3,6 +3,7 @@ import {InputNumber, Button} from 'antd'
 import {
  Link
 } from 'react-router-dom'
+import LayoutDash from "../components/LayoutDash";
 
 const PreDonate = () => {
 
@@ -11,6 +12,7 @@ function onPressEnter(value) {
 }
 
 return (<div>
+    <LayoutDash >
     PreDonate<br/>
     <Button type="link" href="/donate100">100</Button>
     <Button type="link" href="/donate200">200</Button>
@@ -24,6 +26,7 @@ return (<div>
         parser={value => value.replace(/\$\s?|(,*)/g, '')}
         onPressEnter={onPressEnter}
     </InputNumber> MXN
+    </LayoutDash>
 </div>
       
     

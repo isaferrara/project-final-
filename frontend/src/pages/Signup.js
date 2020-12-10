@@ -53,9 +53,12 @@ const Signup = ({ history }) => {
     );
 
   return (
+    <div style={{background: '#004a6e', width: '100%', height:'1200px', paddingTop:'0'}}>
+    <div style={{ padding: '100px 304px'}}>
+    <div style={{padding: '50px', background: 'white', borderRadius: '20px', background: '#F8F8F8'}}> 
     <Row>
       <Col span={24}>
-        <Title level={1}>Signup</Title>
+        <Title level={1} style={{ padding:'0'}}>Signup</Title>
       </Col>
       <Divider />
       <Col span={24}>
@@ -113,6 +116,9 @@ const Signup = ({ history }) => {
         </a>
       </Col>
     </Row>
+    </div>
+  </div>
+  </div>
   )
 }
 

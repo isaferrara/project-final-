@@ -43,40 +43,31 @@ import React from 'react'
     export const useContextInfo = () => useContext(AppContext)
     */
 
-   import { useState, createContext, useContext, useEffect } from "react"
+   import { useState, createContext, useContext, useEffect, useMemo } from "react";
+   import { currentUserFn } from "../services/auth";
    import React from 'react'
-   import { currentUserFn } from '../services/auth'
 
-   const AppCtx = createContext()
-   
-   export const CtxProvider = props => {
-     //Para ver el comportamiento de la ruta privada, cambia a true el valor de inicio del state
-     const [user, setUser] = useState(null)
-   
-     const login = user => setUser(user)
-     const logout = _ => setUser(null)
-   
-     const value = {
-       user,
-       login,
-       logout
-     }
 
+   export const AppContext = createContext();
+   
+   export const AppCtxProvider = (props) => {
+     const [user, setUser] = useState(null);
      useEffect(() => {
-        async function getSessionData() {
-            const { data } = await currentUserFn()
-            login(data);
-        }
-    
-        getSessionData()
-        }, [])
-
-     
+       async function getSessionData() {
+         const { data: currentUser } = await currentUserFn();
+         if (currentUser) setUser(currentUser);
+       }
+       getSessionData();
+     }, []);
    
-     return <AppCtx.Provider {...props} value={value} />
-   }
+     const login = (userInfo) => setUser(userInfo);
    
-   export const useContextInfo = () => {
-     const ctx = useContext(AppCtx)
-     return ctx
-   }
+     const logout = () => setUser(null);
+   
+     const value = useMemo(() => ({ user, login, logout }), [user]);
+   
+     return <AppContext.Provider value={value} {...props} />;
+   };
+   
+   export const useContextInfo = () => useContext(AppContext);
+   

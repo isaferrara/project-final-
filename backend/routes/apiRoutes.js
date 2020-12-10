@@ -12,7 +12,8 @@ const {
   deleteTopic,
   getAllTopic,
   getSingleTopic,
-  updateTopic
+  updateTopic,
+  updateContent
 } = require('../controllers/topics')
 
 const { catchErr } = require('../middlewares')
@@ -32,6 +33,7 @@ router.get('/path/:id', catchErr(getSinglePath))
 
 router.post('/topic/create', catchErr(createTopic))
 router.put('/topic/:id', catchErr(updateTopic))
+router.put('/topic/:id', catchErr(updateContent))
 router.delete('/topic/:id', catchErr(deleteTopic))
 router.get('/topic', catchErr(getAllTopic))
 router.get('/topic/:id', catchErr(getSingleTopic))
