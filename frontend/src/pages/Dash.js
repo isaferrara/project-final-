@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { useContextInfo } from '../hooks/context.js'
 import { Input } from 'antd';
 import { createTopic } from '../services/topics.js'
+import LayoutDash from "../components/LayoutDash";
 const { Search } = Input;
-
 
 const Dash = () => {
     const { user } = useContextInfo()
@@ -96,6 +96,7 @@ const Dash = () => {
             setIsModalVisible(false);
         }
         return (
+            <LayoutDash>
             <div>
              {/* User´s paths */} 
              {user? (
@@ -191,7 +192,9 @@ const Dash = () => {
             ):( 
                 <Skeleton active />
             )}
+            
         </div>
+        </LayoutDash>
         )
     }
 export default Dash

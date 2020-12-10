@@ -27,6 +27,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local-mongoose": "^5.0.1",
+    "react": "^17.0.1",
     "react-draggable": "^4.4.3",
     "serve-favicon": "^2.5.0"
   },

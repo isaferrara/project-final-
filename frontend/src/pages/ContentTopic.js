@@ -15,7 +15,6 @@ import ImgContent from '../components/ImgContent'
 import LayoutDash from "../components/LayoutDash";
 
 
-
 export const ContentTopic = (props) => {
 
     //GENERAL
@@ -49,7 +48,6 @@ export const ContentTopic = (props) => {
                     setContent(data)
                     setAllInfo(data.content)
                     setContents(data.content)
-                    console.log(data, '1')
         
                     let arr=[]
                     for(let i=0; i<data.content.length; i++){
@@ -61,7 +59,6 @@ export const ContentTopic = (props) => {
                         }
                     }
                     setContents(arr)
-                     console.log(data, '3')
                  }
                 getInfoTopic()
                 }, [changes])
@@ -81,11 +78,9 @@ export const ContentTopic = (props) => {
                         allInfoArray=[...allInfo, value.link]
                     }
                     
-                    setContents(contentArray)
-                    console.log(content, 'csetcontent')
-                    
+                    setContents(contentArray)                    
                     setAllInfo(allInfoArray)
-                    console.log(allInfo, 'setinfo')
+  
 
                     const {data}= await updateTopic(props.match.params.id, {
                         title: contenty.title,
@@ -94,7 +89,6 @@ export const ContentTopic = (props) => {
                         content:allInfoArray,
                         })
                     setContent(data) 
-                    console.log(data, 'aaaa')
                 }
         
                topicContent () 
@@ -127,24 +121,18 @@ export const ContentTopic = (props) => {
         
                         {/* BUTTONS */}
         
-                        <Form.Item name="text" rules={[{ required: true, message: 'Please input your name!' }]}>
+                        <Form.Item name="text" >
                             <Button  onClick={setContentForms} style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
                                 Add text
                             </Button>
                         </Form.Item>
         
-                        <Form.Item name="text" rules={[{ required: true, message: 'Please input your name!' }]}>
+                        <Form.Item name="text" >
                             <Button onClick={setLinkForms}  style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
                                 Add link
                             </Button>
                         </Form.Item>
-        
-                        <Form.Item name="text" rules={[{ required: true, message: 'Please input your name!' }]}>
-                            <Button onClick={setImgsForms} style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
-                                Add img
-                            </Button>
-                        </Form.Item>
-                        {/* <Button onClick={saveChanges}> Save</Button> */}
+
                      </div>
         
                         {/* SHOW FORMS */}

@@ -80,7 +80,7 @@ const EditPath = (props) => {
             </Form.Item>
 
             <Form.Item name="category" label="Category:">
-                <Select>
+                <Select placeholder="Please select a category">
                 <Select.Option value="Web Dev">Web Development</Select.Option>
                 <Select.Option value="Ux/Ui">Ux/Ui</Select.Option>
                 <Select.Option value="Dev Ops">Dev Ops</Select.Option>

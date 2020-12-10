@@ -11,7 +11,7 @@ export const LinkContent = (props) => {
         <div>
         {contenty?
         (<div>
-                    <Form.Item name="link" >
+                    <Form.Item name="link" rules={[{ required: true, message: 'Please write a link' }]}>
                     <Input placeholder="Video link (youtube)" bordered={false} style={{ backgroundColor:'white' }} value={<ReactPlayer /> } />
                     </Form.Item>
 

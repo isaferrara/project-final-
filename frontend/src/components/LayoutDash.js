@@ -83,7 +83,9 @@ const LayoutDash = ({ children }) => {
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} 
        style={{shadowBox: '100px'}}>
         <Menu.Item key="1" icon={<UserOutlined />}>
-          Dashboard
+        <Link to={`/dash/${user._id}`}>
+           Dashboard
+        </Link>
         </Menu.Item>
         <Menu.Item key="2" icon={<VideoCameraOutlined />}>
         Your topics

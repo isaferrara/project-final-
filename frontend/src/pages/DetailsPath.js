@@ -78,11 +78,16 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
     <br />
     
     {pathsy.topics.map((topic, i) => 
-        <Link to={`/topic/${topic._id}`}>
-    <Card hoverable number={sum(i)} title={ (i+1) + '     ' + topic.title  } style={{marginBottom:'10px'}}>
+        <Link to={`/topic/${topic._id}`}> 
+    <Card hoverable
+     number={sum(i)} title={ (i+1) + '     ' + topic.title  } style={{marginBottom:'10px'}} >
+
+   
     
-    <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>        
-        <div style={{display:'flex', flexDirection:'column', textAlign:'left', marginLeft: '40px'}}>
+    <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>  
+ 
+
+        <div style={{display:'flex', flexDirection:'column', textAlign:'left', marginLeft: '40px', padding: '20px'}}>
         <p style={{marginBottom:'3px', marginTop:'5px'}} > 
 
         <b>Objective:</b> 
@@ -91,14 +96,15 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
 
         <b>Duration:</b>
         {topic.duration}</p>
-    </div>
+        </div>
+  
 
             <div>
             <Button type="ghost" onClick={ async ()=> {
                 await deleteTopic(topic._id)
                 setChanges(!changes)}}>Delete</Button> 
             </div>
-    </div>
+        </div>
     </Card>
     </Link>
     )}

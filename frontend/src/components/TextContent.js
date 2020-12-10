@@ -11,13 +11,13 @@ export const TextContent = (props) => {
         <div>
         {contenty?
             (<div>
-                <Form.Item name='text'>
+                <Form.Item name='text' rules={[{ required: true, message: 'Please input your knowledge!' }]}>
                 <TextArea  rows={8}  placeholder="Write something" bordered={false} style={{ backgroundColor:'white' }} />
                 </Form.Item>
             
            {/* SUBMIT BUTTON */}
             <div>
-                <Form.Item style={{ marginTop: '10px'}}>
+                <Form.Item style={{ marginTop: '10px'}} >
                 <Button type="primary" htmlType="submit">
                 Submit
                 </Button>

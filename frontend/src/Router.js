@@ -40,7 +40,7 @@ const Router = () => {
     <BrowserRouter >
       
       <Route exact path="/" component={Home} />
-      <PrivDash exact path="/dash/:id" component={Dash} />
+      <PrivateRoute exact path="/dash/:id" component={Dash} />
       <PrivateRoute path='/path/create' component={CreatePath} exact />
       <PrivateRoute path='/path/:id' component={DetailsPath} exact />
       <PrivateRoute path='/topic/:id' component={ContentTopic} exact />
@@ -57,7 +57,7 @@ const Router = () => {
       <Route exact path="/success" component={Success} />
       <Route exact path="/failure" component={Failure} />
       <Route exact path="/pending" component={Pending} />
-            <Route component={NotFound} />
+      
     {/*<Route component={NotFound} />*/}
     </BrowserRouter>
   )
