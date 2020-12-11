@@ -124,70 +124,7 @@ const Dash = () => {
                         ))}
                     </div>
                 </div>
-                {/* Other paths section */} 
-                <div style={{ padding: '1rem 3rem'}}>
-                 {/* searchbar */}
-                <Search placeholder="input search text" onChange={onSearch} allowClear style={{ width: 500 }} />                        <br />         
-                    <h1>Other paths</h1>
-                      {/* shoose any topic to add to own paths */} 
-                    <div > 
-                    <Form  onFinish={onFinish}>
-                    <Button type="primary"  onClick={showModal} htmlType="submit" > Add to my paths  </Button> 
-                    <Form.Item name="checkbox-group">
-                        {/* show only paths that interest user*/} 
-                        <Checkbox.Group > 
-                            {otherPaths?.map(path => (
-                                <div style={{ padding: '1rem', display:'flex', flexDirection:'column'  }} >
-                                <Card hoverable >
-                                <Link to={`/path/${path._id}`}> <h1>{path.title}</h1> </Link> 
-                                <h1>{path._id}</h1>
-                                <Divider>Topics</Divider>
-                                <div style={{ padding: '1rem', display:'flex', flexDirection:'column', width:'350px' }} >
-                                        {path.topics?.map((topic, index) => (
-                                            <Card hoverable   >
-                                                <Checkbox value={topic}>
-                                                <Link to={`/topic/${topic._id}`}>
-                                                <p>{topic.title}</p>
-                                                <p>{topic._id}</p>
-
-                                                </Link>
-                                                </Checkbox>
-                                            </Card> 
-                                        ))}
-                                </div>
-                                </Card>    
-                                </div>   
-                                ))}
-                        </Checkbox.Group>
-                                </Form.Item>
-                        </Form>
-                        {/* modal to select the path to add new topics to */} 
-                        <Modal
-                            title="Basic Modal"
-                            visible={isModalVisible}
-                            onCancel={handleCancel}
-                            okText="Add"
-                            cancelText="cancel"
-                        >
-                    <div > 
-                    <Form  onFinish={handleOk}>
-                        <Form.Item name="checkbox-group">
-                        <Checkbox.Group > 
-                            {pathsy?.map(path => (
-                            <div>
-                                <Checkbox  value={path}>
-                                    <h3>{path.title}</h3> 
-                                </Checkbox>
-                            </div>        
-                            ))}
-                        </Checkbox.Group>
-                        </Form.Item>
-                        <Button type="primary"  htmlType="submit" > Add to my paths  </Button> 
-                        </Form>
-                        </div>
-                        </Modal>
-                    </div>
-                </div>
+                
             </div>
             ):( 
                 <Skeleton active />

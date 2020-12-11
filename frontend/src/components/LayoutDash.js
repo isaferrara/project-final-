@@ -38,6 +38,11 @@ const LayoutDash = ({ children }) => {
               Home
             </Link>
           </Menu.Item>
+          <Menu.Item key="8">
+              <Link to="/explore">
+              Explore
+              </Link>
+          </Menu.Item>
           {!user ? <>
             <Menu.Item key="2">
               <Link to="/signup">
@@ -49,17 +54,23 @@ const LayoutDash = ({ children }) => {
                 Login
             </Link>
             </Menu.Item>
+            <Menu.Item key="7" >
+              <Link to="/explore">
+              Discover
+              </Link>
+            </Menu.Item>
           </> : <React.Fragment>
               <Menu.Item key="6">
               <Link to="/choose-donation">
               Donate
               </Link>
             </Menu.Item>
-              <Menu.Item key="5" onClick={handleLogout}>
+            <Menu.Item key="5" onClick={handleLogout}>
               <Link to="/">
               Logout
               </Link>
             </Menu.Item>
+
             
             </React.Fragment>}
 

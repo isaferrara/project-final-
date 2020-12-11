@@ -20,12 +20,12 @@ return (<div>
     <Button type="link" href="/donate400">400</Button>
     <br/>
     $
-    <InputNumber>
+    {/*<InputNumber>
         defaultValue={1000}
         formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         parser={value => value.replace(/\$\s?|(,*)/g, '')}
         onPressEnter={onPressEnter}
-    </InputNumber> MXN
+    </InputNumber> MXN*/}
     </LayoutDash>
 </div>
       

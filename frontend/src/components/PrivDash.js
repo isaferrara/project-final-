@@ -8,7 +8,7 @@ const PrivDash = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props => (user ? <Component {...props} /> : <Redirect to={`/dash/${user._id}`} />)}
+      render={props => (!user ? <Component {...props} /> : <Redirect to={`/dash/${user._id}`} />)}
     />
   )
 }
