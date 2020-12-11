@@ -9,7 +9,7 @@ import {
     VideoCameraOutlined,
   } from '@ant-design/icons';
   import React from 'react'
-import { Layout, Menu } from 'antd';
+import { Divider, Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom'
 import { useContextInfo } from '../hooks/context'
 import { logoutFn } from '../services/auth'
@@ -27,20 +27,18 @@ const LayoutDash = ({ children }) => {
     }
   
     return (
-        <div style={{background:'gray'}}>
-         <Layout className="layout">
-        <Header className="header" style={{paddingLeft:'200px'}}>
-        <div />
-        <div className="logo" style={{display:'flex', justifyContent:'right'}}>
+      <div className="main" style={{backgroundColor:'#DCDCDC'}}>
+          <Header className="header" style={{paddingLeft:'200px'}}>
+        <div className="logo" style={{display:'flex', justifyContent:'right'}}/>
         <Menu theme="dark" mode="horizontal">
           <Menu.Item key="1">
             <Link to="/">
               Home
             </Link>
           </Menu.Item>
-          <Menu.Item key="8">
-              <Link to="/explore">
-              Explore
+          <Menu.Item key="7">
+              <Link to="/discover">
+              Discover
               </Link>
           </Menu.Item>
           {!user ? <>
@@ -54,13 +52,8 @@ const LayoutDash = ({ children }) => {
                 Login
             </Link>
             </Menu.Item>
-            <Menu.Item key="7" >
-              <Link to="/explore">
-              Discover
-              </Link>
-            </Menu.Item>
           </> : <React.Fragment>
-              <Menu.Item key="6">
+            <Menu.Item key="4">
               <Link to="/choose-donation">
               Donate
               </Link>
@@ -70,16 +63,16 @@ const LayoutDash = ({ children }) => {
               Logout
               </Link>
             </Menu.Item>
-
-            
+            <Menu.Item key="6">
+                <Link to={`/dash/${user._id}`}>
+                  Dashboard
+              </Link>
+              </Menu.Item>
             </React.Fragment>}
 
         </Menu>
-        </div>
       </Header>
-
     <Content style={{ padding: '0 50px' }}>
-      <Layout className="site-layout">
       <Sider
       style={{
         overflow: 'auto',
@@ -87,7 +80,7 @@ const LayoutDash = ({ children }) => {
         position: 'fixed',
         left: 0,
         top: 0,
-        paddingTop: '50px',
+        paddingTop: '70px',
       }}
     >
       <div className="logo" />
@@ -102,12 +95,20 @@ const LayoutDash = ({ children }) => {
         Your topics
         </Menu.Item>
         <Menu.Item key="3" icon={<UploadOutlined />}>
-        Explore paths
+        <Link to={`/explore`}>
+           Explore paths
+        </Link>
         </Menu.Item>
         <Menu.Item key="4" icon={<BarChartOutlined />}>
-        <Link to="/profile">
+        <Link to={"/profile"}>
             Profile
         </Link>
+        </Menu.Item>
+        <Divider> --- </Divider>
+        <Menu.Item key="5" onClick={handleLogout}>
+              <Link to="/">
+              Logout
+              </Link>
         </Menu.Item>
       </Menu>
     </Sider>
@@ -118,14 +119,13 @@ const LayoutDash = ({ children }) => {
             minHeight: 280,
           }}
         >
-        <div className="site-layout-background" style={{ padding: 44, textAlign: 'center', width:'1100px', background: '#fff', shadowBox:'-12px -1px 81px -32px', borderRadius:'20px'}}>
+        <div className="site-layout-background" style={{ padding: 44, textAlign: 'center', width:'1100px', background: '#fff', marginTop:'50px', shadowBox:'-12px -1px 81px -32px', borderRadius:'20px'}}>
         {children}
         </div>
 
         </Content>
-        </Layout>
     </Content>
-    </Layout>
+
     </div>
     )
 }

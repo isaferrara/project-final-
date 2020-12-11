@@ -6,9 +6,9 @@ const data = [
       title: 'Basic',
       content: [
           {
-              price: "U$00.00 donation",
-              mentoring: "no mentoring",
-              support: "no support from the community",
+              price: "$100 donation",
+              mentoring: "Obtain direct support from our community ",
+              support: "All categories",
               jobs: "no IT jobs offers",
               email: "no important email notifications"
           }
@@ -18,9 +18,9 @@ const data = [
         title: 'Freelancer',
         content: [
             {
-                price: "U$30.00 donation",
-                mentoring: "no mentoring",
-                support: "yes, support from the community",
+                price: "$200 donation",
+                mentoring: "Obtain support from teaches ",
+                support: "All categories",
                 jobs: "yes, IT jobs offers",
                 email: "yes, important email notifications"
             }
@@ -30,9 +30,9 @@ const data = [
         title: 'Junior',
         content: [
             {
-                price: "U$50.00 donation",
-                mentoring: "yes, mentoring",
-                support: "yes, support from the community",
+                price: "$400 donation",
+                mentoring: "Obtain personalized study paths",
+                support: "All categories",
                 jobs: "yes, IT jobs offers",
                 email: "yes, important email notifications"
             }
@@ -46,19 +46,17 @@ const AppPricing = () => {
              <div className="container-fluid">
              <div className="titleHolder">
                  <h2>Monthly Donation Plans</h2>
-                 <p>make your learning education path a better live experience</p>
+                 <p>Join the community and recieve monthly donations from grateful users!</p>
              </div>
              <List
             grid={{ gutter: 16, column: 3 }}
             dataSource={data}
             renderItem={item => (
             <List.Item>
-                <Card title={item.title}>
-                <p className="large">{item.content[0].price}</p>
+                <Card >
+                <p style={{fontSize:'30px'}}>{item.content[0].price}</p>
                 <p>{item.content[0].mentoring}</p>
-                <p>{item.content[0].mentoring}</p>
-                <p>{item.content[0].jobs}</p>
-                <p>{item.content[0].email}</p>
+                <p>{item.content[0].support}</p>
                 <Button type="primary" size="large"><i class="fab fa-telegram-plane"></i>&nbsp; Get started</Button>
                 </Card>
             </List.Item>

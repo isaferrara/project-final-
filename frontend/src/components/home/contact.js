@@ -8,7 +8,7 @@ const AppContact = () => {
         <div className="container-fluid">
             <div className="titleHolder">
                 <h2>Get In Touch</h2>
-                <p>Subtitle of the get in touch goes here thinking what to type my friend calm down i only have 2 two hands</p>
+                <p>We would love to hear from you. Tell us what's on your mind. </p>
             </div>
             <Form
         name="normal_login"

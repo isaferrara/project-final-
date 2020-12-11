@@ -8,8 +8,8 @@ const AppFeature = () => {
         <div className="block featureBlock bgGray">
             <div className="container-fluid">
             <div className="titleHolder">
-               <h2>Rutas de Aprendizaje</h2> 
-               <p>Escoje , Haz Click y Sube tu nivel en pocas semanas.</p>
+               <h2>Categories</h2> 
+               <p>You can find all the knowledge you need.</p>
             </div>
             <Row gutter={[16, 16]}>
             <Col span={8}>
@@ -18,7 +18,7 @@ const AppFeature = () => {
        
                 cover={<img alt="example"  style={{ height: '300px'}} src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" />}
             >
-                <Meta title="BackEnd" />
+                <Meta title="web development" />
             </Card>
             </Col>
             <Col span={8}>
@@ -27,7 +27,7 @@ const AppFeature = () => {
        
                 cover={<img alt="example" style={{ height: '300px'}} src="https://images.unsplash.com/photo-1559028012-481c04fa702d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1535&q=80" />}
             >
-                <Meta title="FrontEnd" />
+                <Meta title="Ux/Ui design" />
             </Card>
             </Col>
             <Col span={8}>
@@ -45,7 +45,7 @@ const AppFeature = () => {
        
                 cover={<img alt="example" style={{ height: '300px'}} src="https://images.unsplash.com/photo-1496368077930-c1e31b4e5b44?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" />}
             >
-                <Meta title="CyberSecurity" />
+                <Meta title="Cyber Security" />
             </Card>
             </Col>
             <Col span={8}>
@@ -54,7 +54,7 @@ const AppFeature = () => {
        
                 cover={<img alt="example" style={{ height: '300px'}} src="https://images.unsplash.com/photo-1562577309-4932fdd64cd1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80" />}
             >
-                <Meta title="Digital Marketing" />
+                <Meta title="Data Science" />
             </Card>
             </Col>
             <Col span={8}>
@@ -63,7 +63,7 @@ const AppFeature = () => {
        
                 cover={<img alt="example" style={{ height: '300px'}} src="https://images.unsplash.com/photo-1564069114553-7215e1ff1890?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2089&q=80" />}
             >
-                <Meta title="SoftSkills" />
+                <Meta title="Machine Learning" />
             </Card>
             </Col>
             </Row>

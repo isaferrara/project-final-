@@ -1,40 +1,46 @@
 import React from 'react';
 import { Carousel, Button, Typography } from 'antd';
+import { Link } from 'react-router-dom'
 
-const {Title, Text, Link, Paragraph} = Typography;
+const {Title, Text, Paragraph} = Typography;
 
 const items = [
     {
         key: '1',
-        title: 'Aprende',
-        content: 'Estudia las diferentes rutas creadas por la comunidad',
+        title: 'Learning paths',
+        content: 'Boost your skills. Stay sharp. Get ahead.',
     },
     {
         key: '1',
-        title: 'Comparte',
-        content: 'Crea tus propias rutas para ti y compartelas con la comunidad',
+        title: 'Share your knowledge',
+        content: 'Create & help others grow.',
     },
     {
         key: '1',
-        title: 'Trabaja',
-        content: 'Date a conocer y encuentra el trabajo que tanto amas',
+        title: 'Network',
+        content: 'Meet people. Form a community.',
     },
 ]
 
 const AppHero = () => {
+
+
     return (
 
         <div className="heroBlock">
-        <Carousel>
+        <Title style={{ fontSize: '80px', color: '#ffffff', fontFamily:'roboto', marginBottom: '0px', paddingTop:'230px', marginLeft:'760px' }}>Knowlee</Title>
+
+        <Carousel autoplay >
         {items.map(item => {
             return (
-             <div key={item.key} className="container-fluid">
-             <div className="content">
-              <Title style={{ fontSize: '50px', color: '#ffffff' }}>{item.title}</Title>
-              <p style={{ fontSize: '30px', color: '#ffffff' }}>{item.content}</p>
-              <div className="btnHolder">
-              <Button size="large">Learn more</Button>
-              <Button size="middle">Watch a demo</Button>
+             <div key={item.key} className="container-fluid" style={{marginLeft: '840px', marginTop: '0'}}>
+             <div className="content" style={{marginLeft: '830px', paddingBottom: '400px'}}>
+             <div className="btnHolder" style={{marginBottom: '200px'}}>
+             <p style={{ fontSize: '30px', color: '#ffffff', fontFamily:'sans-serif', fontWeight:'bold', paddingTop:'50px', marginBottom:'0px' }}>{item.title}</p>
+              <p style={{ fontSize: '25px', color: '#ffffff', fontFamily:'sans-serif', fontWeight:'lighter'  }}>{item.content}</p>
+             <div style={{ fontSize: '20px', color: 'white', backgroundColor:'#DC143C', height:'40px', border:'none', borderRadius:'10px',paddin:'5px'}} >
+              <Link style={{ fontSize: '20px', color: 'white'}}to='/login'  >Start learning</Link>
+            </div>
               </div>
              </div>
              </div>

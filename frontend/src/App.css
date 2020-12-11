@@ -2,7 +2,10 @@
 general 
 -------
 */
-body {
+html{
+  background: #f8f8f8;
+}
+  body {
   font-size: 16px;
   line-height: 1.6;
   color: #333;
@@ -10,8 +13,7 @@ body {
 }
 .container-fluid {
   margin: 0 auto;
-  max-width: 1200px;
-  padding: 0 15px;
+  max-width: 1400px;
 }
 .ant-layout {
   background: #fff !important;
@@ -137,6 +139,7 @@ p {
   background: #1890ff;
   width: 1px;
   position: absolute;
+
   top: 2px;
   bottom: 2px;
   left: 30%;
@@ -171,13 +174,16 @@ p {
   ---- 
   */
 .heroBlock {
-  background: url("https://images.unsplash.com/photo-1562819606-b7a0ebd7e7c5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80") no-repeat;
+  background: url("https://media.giphy.com/media/i4jKn7itdV2Tvjzj6Y/giphy.gif") no-repeat;
   background-position: 50% 100%;
   background-size: cover;
   height: 100vh;
+  margin-left: 0;
 }
 .heroBlock .container-fluid {
   display: block !important;
+
+
 }
 .heroBlock .ant-carousel,
 .heroBlock .ant-carousel div {
@@ -190,11 +196,12 @@ p {
   background: #1890ff !important;
 }
 .heroBlock .content {
-  max-width: 640px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 0 70px;
+
+  padding: 0 0 0px 70px;
 }
 .heroBlock h3 {
   font-size: 30px;
@@ -216,7 +223,7 @@ p {
   ----- 
   */
 .block {
-  padding: 60px 0;
+  padding: 20px 0;
   border-bottom: 1px solid #d9d9d9;
 }
 /* 
@@ -240,7 +247,7 @@ p {
   ------------
   */
 .worksBlock {
-  background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b3c3e31c-e336-4e7c-a0b2-5c3bc3663366/dfelxu-38492e37-7119-4c82-9c2b-7a127c32c162.jpg/v1/fill/w_1024,h_768,q_75,strp/linux_by_zachk_dfelxu-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD03NjgiLCJwYXRoIjoiXC9mXC9iM2MzZTMxYy1lMzM2LTRlN2MtYTBiMi01YzNiYzM2NjMzNjZcL2RmZWx4dS0zODQ5MmUzNy03MTE5LTRjODItOWMyYi03YTEyN2MzMmMxNjIuanBnIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.kYOFDOogRjEYpIc3q62iUjCdQxdOuL76wyQCADfYskI")
+  background: url("https://media.giphy.com/media/3o752oeUYz6S2SHi5W/giphy.gif")
     no-repeat;
   background-position: 50% 0;
   background-size: cover;
@@ -264,7 +271,8 @@ p {
   text-align: center;
 }
 .worksBlock .contentHolder button {
-  font-size: 40px;
+  font-weight: 50;
+  font-size: 20px;
   line-height: 1;
   background: none;
   border: 1px solid #fff;

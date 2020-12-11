@@ -1,66 +1,3 @@
-/*import React, {useState, useEffect} from 'react';
-import { getAllPaths } from '../services/paths.js'
-import { Carousel } from 'antd';
-import ReactPlayer from 'react-player/youtube'
-
-const background = "https://onestopmedia.com.au/wp-content/uploads/2019/10/OSM-dev-top-updated-img.png"
-const contentStyle = {
-  height: '400px',
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  //background: '#364d79',
-  backgroundImage: "url(" + background + ")"
-};
-
-function Home() {
-  const [pathsy, setPaths] = useState(null)
-
-  useEffect(() => {
-      async function getPaths() {
-          const {data} = await getAllPaths()
-          setPaths(data)
-
-      }
-      getPaths()
-      }, [])
-  
-
-  return (
-    <div>
-        <Carousel autoplay>
-                <div>
-                <h3 style={contentStyle} >1</h3>
-                </div>
-                <div>
-                <h3 style={contentStyle}>2</h3>
-                </div>
-                <div>
-                <h3 style={contentStyle}>3</h3>
-                </div>
-                <div>
-                <h3 style={contentStyle}>4</h3>
-                </div>
-        </Carousel>
-        <div style={{ padding: '1rem 3rem'}}>
-        <ReactPlayer url="https://www.youtube.com/watch?v=YBYmhWlk8o4" />
-
-        <h1>Learning paths</h1> 
-            {pathsy?.map(path => (
-            <div style={{border:' 1px black solid', margin:'10px'}}>    
-            <h1>{path.title}</h1>
-            {path.topics?.map(({title}) => (
-                <p>{title}</p> ))}
-            </div>          
-            ))}
-            
-        </div>
-    </div>
-  )
-}
-
-export default Home;*/
-
 import React, {useState, useEffect} from 'react';
 import { getAllPaths } from '../services/paths.js'
 import AppHero from '../components/home/hero';
@@ -70,8 +7,20 @@ import Appworks from '../components/home/works';
 import Appfaq from '../components/home/faq';
 import AppPricing from '../components/home/pricing';
 import AppContact from '../components/home/contact';
+import { Layout, Menu } from 'antd';
+import { Link } from 'react-router-dom'
+import { useContextInfo } from '../hooks/context'
+import { logoutFn } from '../services/auth'
+const { Header, Content, Footer } = Layout;
+
 function Home() {
+  const { user, logout } = useContextInfo()
   const [pathsy, setPaths] = useState(null)
+
+  async function handleLogout() {
+    await logoutFn()
+    logout()
+  }
   useEffect(() => {
       async function getPaths() {
           const {data} = await getAllPaths()
@@ -81,6 +30,51 @@ function Home() {
       }, [])  
   return (
       <div className="main">
+<Header className="header" style={{paddingLeft:'200px'}}>
+        <div className="logo" style={{display:'flex', justifyContent:'right'}}/>
+        <Menu theme="dark" mode="horizontal">
+          <Menu.Item key="1">
+            <Link to="/">
+              Home
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="7">
+              <Link to="/discover">
+              Discover
+              </Link>
+          </Menu.Item>
+          {!user ? <>
+            <Menu.Item key="2">
+              <Link to="/signup">
+                Signup
+            </Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Link to="/login">
+                Login
+            </Link>
+            </Menu.Item>
+          </> : <React.Fragment>
+            <Menu.Item key="6">
+              <Link to="/choose-donation">
+              Donate
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="5" onClick={handleLogout}>
+              <Link to="/">
+              Logout
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="4">
+                <Link to={`/dash/${user._id}`}>
+                  Dashboard
+              </Link>
+              </Menu.Item>
+            
+            </React.Fragment>}
+
+        </Menu>
+      </Header>
           <AppHero />          
           <AppAbout />    
           <AppFeature /> 
@@ -88,16 +82,8 @@ function Home() {
           <Appfaq />
           <AppPricing />
           <AppContact />
-          <h1>Learning paths</h1> 
-            {pathsy?.map(path => (
-            <div style={{border:' 1px black solid', margin:'10px'}}>    
-            <h1>{path.title}</h1>
-            {path.topics?.map(({title}) => (
-                <p>{title}</p> ))}
-            </div>          
-            ))}
      </div>
-       
+
         
   );
 }

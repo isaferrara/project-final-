@@ -1,8 +1,11 @@
 import React from 'react'
-import { Row, Col, Form, Input, Button, Typography, Divider,message } from 'antd'
+import {Layout, Menu,  Row, Col, Form, Input, Button, Typography, Divider,message } from 'antd'
 import { loginFn, profile } from '../services/auth'
 import { useContextInfo } from '../hooks/context'
-import authLayout from '../components/authLayout'
+import { Link } from 'react-router-dom'
+import { logoutFn } from '../services/auth'
+
+const { Header} = Layout;
 
 const { Title } = Typography
 
@@ -11,19 +14,21 @@ const googleUrl = process.env.NODE_ENV === 'development' ?
 
 const Login = ({ history }) => {
   const [form] = Form.useForm()
-  const { login } = useContextInfo()
+  const { login, user, logout} = useContextInfo()
+
+  async function handleLogout() {
+    await logoutFn()
+    logout()
+  }
+
 
   async function handleSubmit(userInput) {
-    /*const { data } = await loginFn(userInput)
-    login(data);
-    history.push(`/dash/${data._id}`)*/
 
     try {
       await loginFn(userInput)
       const {
         data: { user }
       } = await profile()
-      console.log(user)
       login(user)
       history.push(`/dash/${user._id}`)
     } catch (err) {
@@ -31,7 +36,42 @@ const Login = ({ history }) => {
     }
   }
   return (
-    <div style={{background: '#004a6e', width: '100%', height:'800px', paddingTop:'0'}}>
+    <div>
+    <Header className="header" style={{paddingLeft:'200px'}}>
+        <div className="logo" style={{display:'flex', justifyContent:'right'}}/>
+        <Menu theme="dark" mode="horizontal">
+          <Menu.Item key="1">
+            <Link to="/">
+              Home
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="7">
+              <Link to="/discover">
+              Discover
+              </Link>
+          </Menu.Item>
+          {!user ? <>
+            <Menu.Item key="2">
+              <Link to="/signup">
+                Signup
+            </Link>
+            </Menu.Item>     
+          </> : <React.Fragment>
+            <Menu.Item key="6">
+              <Link to="/choose-donation">
+              Donate
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="4">
+                <Link to={`/dash/${user._id}`}>
+                Dashboard
+              </Link>
+              </Menu.Item>
+            </React.Fragment>}
+        </Menu>
+      </Header>
+
+    <div style={{backgroundImage: 'url("https://roundtables.abl.org/wp-content/uploads/2018/04/BlueBackground_150475949.jpg")', width: '100%', height:'800px', paddingTop:'0'}}>
     <div style={{ padding: '100px 304px'}}>
     <div style={{padding: '50px', background: 'white', borderRadius: '20px', background: '#F8F8F8'}}> 
     <Row>
@@ -60,6 +100,7 @@ const Login = ({ history }) => {
       </Col>
     </Row>
     </div>
+  </div>
   </div>
   </div>
   )

@@ -96,16 +96,21 @@ const ExplorePaths = () => {
             setIsModalVisible(false);
         }
         return (
+            <div style={{  display:'flex', flexDirection:'column', justifyContent:'content', width:'1400px'}}>
+
             <LayoutDash>
-                <div>
-                
-                    {/* Other paths section */} 
-                    <div style={{ padding: '1rem 3rem'}}>
+             {otherPaths?
+                (
+                    <div style={{borderRadius:' 20px ', margin:'10px', marginRight:'20px'}}>
+                    <h1 style={{fontFamily:'Verdana', fontSize:'30px', paddingTop: '50px'}}><b>Find the best study paths</b></h1> 
                     {/* searchbar */}
                     <Search placeholder="input search text" onChange={onSearch} allowClear style={{ width: 500 }} />                        <br />         
-                        <h1>Other paths</h1>
+
+                    <div style={{ display:'flex', flexDirection:'row', flexWrap: 'wrap' , justifyContent:'center' }}>    
+                    
+
                         {/* shoose any topic to add to own paths */} 
-                        <div > 
+                        <div style={{ display:'flex', flexDirection:'row', flexWrap: 'wrap' , justifyContent:'center' }}>    
                         <Form  onFinish={onFinish}>
                         <Button type="primary"  onClick={showModal} htmlType="submit" > Add to my paths  </Button> 
                         <Form.Item name="checkbox-group">
@@ -113,9 +118,10 @@ const ExplorePaths = () => {
                             <Checkbox.Group > 
                                 {otherPaths?.map(path => (
                                     <div style={{ padding: '1rem', display:'flex', flexDirection:'column'  }} >
-                                    <Card hoverable >
-                                    <Link to={`/path/explore/${path._id}`}> <h1>{path.title}</h1> </Link> 
-                                    <h1>{path._id}</h1>
+                                    <Card hoverable  style={{backgroundColor: 'white', borderRadius:'10px', boxShadow: '3px 4px 25px -7px rgba(0,0,0,0.75)', width:'260px'}} >
+                                    <Card type="inner" style={{ color:'white', backgroundColor:'#0B648A', borderRadius:'5px'}}>
+                                        <Link to={`/path/explore/${path._id}`}> <h1>{path.title}</h1> </Link> 
+                                    </Card>
                                     <Divider>Topics</Divider>
                                     <div style={{ padding: '1rem', display:'flex', flexDirection:'column', width:'350px' }} >
                                             {path.topics?.map((topic, index) => (
@@ -123,8 +129,6 @@ const ExplorePaths = () => {
                                                     <Checkbox value={topic}>
                                                     <Link to={`/topicdetails/${topic._id}`}>
                                                     <p>{topic.title}</p>
-                                                    <p>{topic._id}</p>
-
                                                     </Link>
                                                     </Checkbox>
                                                 </Card> 
@@ -170,6 +174,8 @@ const ExplorePaths = () => {
                 
            
         </LayoutDash>
+        </div>
+
         )
     }
 export default ExplorePaths

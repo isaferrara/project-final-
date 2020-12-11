@@ -5,39 +5,40 @@ const { Panel } = Collapse;
 
 const Appfaq = () => {
     return (
-        <div className="block faqBlock">
+        <div className="block faqBlock" style={{display:'flex'}}>
           <div className="container-fluid">
           <div className="titleHolder">
-              <h2>Preguntas Frecuentes</h2>
-              <p>aqui encontraras la dudas mas usuales</p>
+              <h2>FAQ</h2>
+              <p>Learn more about us</p>
           </div>
+          <div style={{width:'600px'}}>
           <Collapse defaultActiveKey={['1']}>
-            <Panel header="Tiene algun costo ser usuario?" key="1">
-            <p>R//: No tiene ningun costo, es totalmente gratuito</p>
+          <Panel header="What's Knowlee?" key="1" style={{fontSize:'20px'}}>
+            <p>Knowlee is a the best community where you learn, create and work the best technology careers </p>
             </Panel>
-            <Panel header="Que es Knowlee?" key="2">
-            <p>R//: Una Plataforma Comunidad donde aprendes, creas y trabajas las mejores carreras tecnologicas</p>
+            <Panel header="What does Knowlee mean?" key="2" style={{fontSize:'20px'}}>
+            <p>Knowlee = Knowledge + Free </p>
             </Panel>
-            <Panel header="Que son las Donaciones?" key="3">
-            <p>R//:Es un ingreso para el mantenimiendo de nuestra plataforma, nuestro equipo para que puedan comer y pagar su alquiler mientras te ayudan a que seas el mejor talento en tu futuro trabajo</p>
+            <Panel header="Can I still make money from it?" key="3" style={{fontSize:'20px'}}>
+            <p> Sure! We encourage our users to show their appreciation by giving voluntary donations </p>
             </Panel>
-            <Panel header="Que tecnologias aprendere?" key="4">
-            <p>R//: Las que tu quieras! y te gusten! tenemos de todo tipo desde backend (codigo en el servidor) como frontend (codigo en el cliente) pasando por muchas otras areas</p>
+            <Panel header="What can I learn?" key="4" style={{fontSize:'20px'}}>
+            <p> Whatever you want! We have all kinds: from backend (code on the server) to frontend (code on the client) through many other areas</p>
             </Panel>
-            <Panel header="Cuanto tiempo demoro en aprender?" key="5">
-            <p>R//: Esta es la mejor pregunta, depende de ti y tus ganas, recuerda la disciplina vence al talento, pero para darte una respuesta sincera en tu primer mes ya podras crear algo!, que te parece? no es super genial? hasta yo mismo me sorprendi</p>
+            <Panel header="What are the categories?" key="5" style={{fontSize:'20px'}}>
+            <p>Web Development, Ux/Ui Design, Cyber Security, Data Analysis, Dev Ops and Data Science </p>
             </Panel>
-            <Panel header="No entiendo muy bien los planes?" key="6">
-            <p>R//: OK sencillo, el plan basico no incluye ningun servicio solo el uso completo de la plataforma, el plan freelancer incluye vacantes y notificaciones a tu correo y el plan junior incluye todo lo anterior mas mentoria y soporte tecnico</p>
+            <Panel header="Direct support from teacher" key="6" style={{fontSize:'20px'}}>
+            <p>When you give our teachers donation you will be able to contact them however they don't have the obligation to answer </p>
             </Panel>
-            <Panel header="Me gustaria iniciar ya mismo como hago?" key="7">
+            <Panel header="I want to start now!" key="7" style={{fontSize:'20px'}}>
             <p>R//: Escribenos un e-mail y con gusto te contactaremos!, muchas gracias </p>
             </Panel>
         </Collapse>
+        </div>
         <div className="quickSupport">
-            <h2>Necesitas Ayuda?</h2>
-            <p>Envianos un e-mail dale click en el boton de abajo</p>
-            <Button type="primary"><i size="large" class="fas fa-envelope"></i>&nbsp; E-mail tus preguntas</Button>
+            <h2>Need more help </h2>
+            <Button type="primary"><i size="large" class="fas fa-envelope"></i> Write us</Button>
         </div>
           </div>            
         </div>

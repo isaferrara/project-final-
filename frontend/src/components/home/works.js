@@ -19,8 +19,8 @@ const AppWorks = () => {
         <div className="block worksBlock">
             <div className="container-fluid">
                 <div className="titleHolder">
-                    <Title style={{ color: '#ffffff'}}>Linux</Title>
-                    <h2>Asi como lo vez y escuchas mucho Linux, linux y mas linux y terminal de comandos aprenderas con nosotros</h2>
+                    <Title style={{ color: '#ffffff'}}>Learn to learn</Title>
+                    <h2>Our mission is to help you create new ways to study and learn in a structured and precise way </h2>
                 </div>
                 <div className="contentHolder">
                     <Button onClick={showModal}>
@@ -34,7 +34,7 @@ const AppWorks = () => {
                     footer={null}
                 >
                     <iframe width="100%" height="350"
-                    src="https://www.youtube.com/embed/BMGixkvJ-6w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    src="https://www.youtube.com/watch?v=kMi13DoDBAM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen="allowfullscreen"
                     mozallowfullscreen="mozallowfullscreen" 
                     msallowfullscreen="msallowfullscreen" 

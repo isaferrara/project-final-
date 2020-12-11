@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect}from 'react'
 import { createPath } from '../services/paths.js'
 import { createTopic } from '../services/topics.js'
 import LayoutDash from "../components/LayoutDash";
@@ -21,6 +21,7 @@ import {useContextInfo} from '../hooks/context'
  const CreatePath = (props) => {
     const [form] = Form.useForm()
     const {user}= useContextInfo()
+    const [isModalVisible, setIsModalVisible] = useState(true);
 
     const submitForm=  async (path) =>{ 
         const {data}= await createPath(
@@ -33,7 +34,7 @@ import {useContextInfo} from '../hooks/context'
         )
 
         const {_id}= data
-        path.topics? 
+        {path.topics? (
         await path.topics.map( topics=>{
             createTopic(
             {title:topics.title,
@@ -42,15 +43,19 @@ import {useContextInfo} from '../hooks/context'
             content: topics.content,
             pathId:_id
             })
-        }): path.topics=' '
+        })): ( Error ('Parameter is not a number!'))}
+
+        console.log(path)
         form.resetFields()
-        props.history.push(`/dash/${path._id}`)
+        setIsModalVisible(false);
+
+        // props.history.push(`/dash/${user._id}`)
         } 
 
 
     return (
         <div>
-         <LayoutDash >
+
             <Row>
         <Col span={24}>
         <h1>Add new path</h1> 
@@ -81,8 +86,15 @@ import {useContextInfo} from '../hooks/context'
               <Input.TextArea />
             </Form.Item>
 
-            <Form.Item name="category" label="Category:">
-                <Select>
+            <Form.Item name="category" label="Category:"
+            rules={[
+            {
+                required: true,
+                message: 'Please input a category!',
+            }, 
+            ]}>
+            
+                <Select placeholder="Category">
                 <Select.Option value="Web Dev">Web Development</Select.Option>
                 <Select.Option value="Ux/Ui">Ux/Ui</Select.Option>
                 <Select.Option value="Dev Ops">Dev Ops</Select.Option>
@@ -91,7 +103,14 @@ import {useContextInfo} from '../hooks/context'
                 </Select>
             </Form.Item>
 
-            <Form.List name="topics">
+            <Form.List name="topics"
+            rules={[
+            {
+                required: true,
+                message: 'Please at least one topic!',
+            }, 
+            ]}>
+    
         {(fields, { add, remove }) => (
             <>
                 {fields.map(field => (
@@ -144,7 +163,6 @@ import {useContextInfo} from '../hooks/context'
             </Form>
             </Col>
         </Row>
-        </LayoutDash>
         </div>
     )
 }

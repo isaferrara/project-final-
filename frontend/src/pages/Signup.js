@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
-import { Row, Col, Form, Input, Button, Typography, Divider, Upload } from 'antd'
+import { Layout, Menu, Row, Col, Form, Input, Button, Typography, Divider, Upload } from 'antd'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import {PasswordInput} from 'antd-password-input-strength'
 import { signupFn } from '../services/auth'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { useContextInfo } from '../hooks/context'
+
 
 const { Title } = Typography
+const { Header} = Layout;
 
 const cloudinaryAPI = 'https://api.cloudinary.com/v1_1/djjro5m0g/image/upload' 
 
@@ -16,11 +20,10 @@ const Signup = ({ history }) => {
   const [form] = Form.useForm()
   const [img, setImg] = useState(null)
   const [loading, setLoading] = useState(null)
+  const { user} = useContextInfo()
+
 
   async function handleSubmit(userInput) {
-    //await signupFn(userInput)
-    //history.push('/login')
-    //console.log(userInput)
     const usr = {...userInput, image: img}
     const {data : newUsr} = await signupFn(usr)
     console.log(newUsr)
@@ -53,7 +56,42 @@ const Signup = ({ history }) => {
     );
 
   return (
-    <div style={{background: '#004a6e', width: '100%', height:'1200px', paddingTop:'0'}}>
+    <div>
+    <Header className="header" style={{paddingLeft:'200px'}}>
+    <div className="logo" style={{display:'flex', justifyContent:'right'}}/>
+    <Menu theme="dark" mode="horizontal">
+      <Menu.Item key="1">
+        <Link to="/">
+          Home
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="7">
+          <Link to="/discover">
+          Discover
+          </Link>
+      </Menu.Item>
+      {!user ? <>
+        <Menu.Item key="2">
+          <Link to="/login">
+            Login
+        </Link>
+        </Menu.Item>     
+      </> : <React.Fragment>
+          
+        <Menu.Item key="6">
+          <Link to="/choose-donation">
+          Donate
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="4">
+            <Link to={`/dash/${user._id}`}>
+            Dashboard
+          </Link>
+          </Menu.Item>
+        </React.Fragment>}
+    </Menu>
+  </Header>
+    <div style={{backgroundImage: 'url("https://roundtables.abl.org/wp-content/uploads/2018/04/BlueBackground_150475949.jpg")', width: '100%', height:'800px', paddingTop:'0'}}>
     <div style={{ padding: '100px 304px'}}>
     <div style={{padding: '50px', background: 'white', borderRadius: '20px', background: '#F8F8F8'}}> 
     <Row>
@@ -117,6 +155,7 @@ const Signup = ({ history }) => {
       </Col>
     </Row>
     </div>
+  </div>
   </div>
   </div>
   )

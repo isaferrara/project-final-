@@ -100,7 +100,7 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
   
 
             <div>
-            <Button type="ghost" onClick={ async ()=> {
+            <Button type="ghost" danger onClick={ async ()=> {
                 await deleteTopic(topic._id)
                 setChanges(!changes)}}>Delete</Button> 
             </div>

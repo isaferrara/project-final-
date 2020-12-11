@@ -26,6 +26,8 @@ import PrivDash from "./components/PrivDash"
 import ExplorePaths from "./pages/ExplorePaths"
 import DetailsExplorePath from "./pages/DetailsExplorePath"
 import DetailsTopic from "./pages/DetailsTopic"
+import DiscoverPaths from './pages/DiscoverPaths';
+
 
 ///Dummy Components
 //const Home = () => <h1>Home</h1>
@@ -43,12 +45,13 @@ const Router = () => {
       
       <Route exact path="/" component={Home} />
       <PrivateRoute exact path="/dash/:id" component={Dash} />
-      <PrivateRoute path='/path/create' component={CreatePath} exact />
+      <Route path='/path/create' component={CreatePath} exact />
       <PrivateRoute path='/path/:id' component={DetailsPath} exact />
-      <Route path='/explore' component={ExplorePaths} exact />
+      <Route path='/discover' component={DiscoverPaths} exact />
+      <PrivateRoute path='/explore' component={ExplorePaths} exact />
       <Route path='/path/explore/:id' component={DetailsExplorePath} exact />      
       <PrivateRoute path='/topic/:id' component={ContentTopic} exact />
-      <PrivateRoute path='/topicdetails/:id' component={DetailsTopic} exact />
+      <Route path='/topicdetails/:id' component={DetailsTopic} exact />
       <PrivDash path='/login' component={Login} exact/>
       <Route path='/signup' component={Signup} exact/>
       <PrivateRoute path='/profile' component={Profile} exact />
