@@ -23,7 +23,9 @@ import Progreso from "./pages/Progreso"
 import ChooseDonation from './pages/ChooseDonation'
 import PrivateRoute from "./components/PrivateRoute"
 import PrivDash from "./components/PrivDash"
-
+import ExplorePaths from "./pages/ExplorePaths"
+import DetailsExplorePath from "./pages/DetailsExplorePath"
+import DetailsTopic from "./pages/DetailsTopic"
 
 ///Dummy Components
 //const Home = () => <h1>Home</h1>
@@ -43,8 +45,11 @@ const Router = () => {
       <PrivateRoute exact path="/dash/:id" component={Dash} />
       <PrivateRoute path='/path/create' component={CreatePath} exact />
       <PrivateRoute path='/path/:id' component={DetailsPath} exact />
+      <Route path='/explore' component={ExplorePaths} exact />
+      <Route path='/path/explore/:id' component={DetailsExplorePath} exact />      
       <PrivateRoute path='/topic/:id' component={ContentTopic} exact />
-      <Route path='/login' component={Login} exact/>
+      <PrivateRoute path='/topicdetails/:id' component={DetailsTopic} exact />
+      <PrivDash path='/login' component={Login} exact/>
       <Route path='/signup' component={Signup} exact/>
       <PrivateRoute path='/profile' component={Profile} exact />
       <Route path='/multimedia' component={Multimedia} exact />

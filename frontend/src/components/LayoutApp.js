@@ -25,6 +25,11 @@ const LayoutApp = ({ children }) => {
               Home
             </Link>
           </Menu.Item>
+          <Menu.Item key="7">
+              <Link to="/explore">
+              Explore
+              </Link>
+          </Menu.Item>
           {!user ? <>
             <Menu.Item key="2">
               <Link to="/signup">
@@ -52,6 +57,7 @@ const LayoutApp = ({ children }) => {
               Donate
               </Link>
             </Menu.Item>
+            
             </React.Fragment>}
 
         </Menu>

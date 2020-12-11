@@ -23,6 +23,7 @@ const Login = ({ history }) => {
       const {
         data: { user }
       } = await profile()
+      console.log(user)
       login(user)
       history.push(`/dash/${user._id}`)
     } catch (err) {
