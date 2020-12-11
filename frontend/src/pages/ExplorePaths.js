@@ -17,7 +17,8 @@ const ExplorePaths = () => {
     const [selectedTopics, setSelectedTopics] = useState(null)
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [changes, setChanges] = useState(false);
-
+    const [selected, setSelected] = useState(false);
+    const [selectedPath, setSelectedPath] = useState(false);
 
     useEffect(() => {
         async function getPaths() {
@@ -52,6 +53,7 @@ const ExplorePaths = () => {
             let allPaths= allTitles.filter(info=> info.title.toLowerCase()===search)
             console.log(allPaths, 'titles') 
             setOtherPaths(allPaths)
+            
           }
 
          //show modal to transfer topics 
@@ -59,9 +61,22 @@ const ExplorePaths = () => {
             setIsModalVisible(true);
           };
 
+          function activate(value){
+              console.log(value.target.checked)
+              value.target.checked? setSelected(true) : setSelected(false)
+          }
+
+          function activatePath(value){
+            console.log(value.target.checked)
+            value.target.checked? setSelectedPath(true) : setSelectedPath(false)
+        }
+
           //on submit transfer topics to users paths
         const handleOk = (values) => {
             setIsModalVisible(false);
+          
+ 
+   
 
             async function getPaths() {
                 //Check every path 
@@ -71,7 +86,7 @@ const ExplorePaths = () => {
                 //Id of all selected paths
                 let idPath= values['checkbox-group'][i]._id
                 allPathsy.push(values['checkbox-group'][i])
-
+                
 
                 // all selected topics
                 for(let i=0; i<selectedTopics['checkbox-group'].length; i++  ){             
@@ -96,9 +111,9 @@ const ExplorePaths = () => {
             setIsModalVisible(false);
         }
         return (
-            <div style={{  display:'flex', flexDirection:'column', justifyContent:'content', width:'1400px'}}>
+            <div style={{  display:'flex', flexDirection:'column', justifyContent:'content',  width:'100%',  height:'100%', alignContent:'center'}}>
 
-            <LayoutDash>
+            <LayoutDash style={{paddingRight:'0px'}}>
              {otherPaths?
                 (
                     <div style={{borderRadius:' 20px ', margin:'10px', marginRight:'20px'}}>
@@ -107,66 +122,73 @@ const ExplorePaths = () => {
                     <Search placeholder="input search text" onChange={onSearch} allowClear style={{ width: 500 }} />                        <br />         
 
                     <div style={{ display:'flex', flexDirection:'row', flexWrap: 'wrap' , justifyContent:'center' }}>    
-                    
-
+                
                         {/* shoose any topic to add to own paths */} 
                         <div style={{ display:'flex', flexDirection:'row', flexWrap: 'wrap' , justifyContent:'center' }}>    
                         <Form  onFinish={onFinish}>
-                        <Button type="primary"  onClick={showModal} htmlType="submit" > Add to my paths  </Button> 
+                        {selected? <Button type="primary" style={{marginTop:'30px'}} onClick={showModal} htmlType="submit" > Add to my paths  </Button>:<Button type="primary" style={{marginTop:'30px'}} disabled> Select topics to add   </Button>
+ }
+                        <div style={{ padding: '1rem', display:'flex', flexDirection:'row'  }} >
+
                         <Form.Item name="checkbox-group">
                             {/* show only paths that interest user*/} 
                             <Checkbox.Group > 
                                 {otherPaths?.map(path => (
                                     <div style={{ padding: '1rem', display:'flex', flexDirection:'column'  }} >
-                                    <Card hoverable  style={{backgroundColor: 'white', borderRadius:'10px', boxShadow: '3px 4px 25px -7px rgba(0,0,0,0.75)', width:'260px'}} >
+                                    <Card hoverable  style={{backgroundColor: 'white', borderRadius:'10px', boxShadow: '3px 4px 25px -7px rgba(0,0,0,0.75)', width:'460px'}} >
                                     <Card type="inner" style={{ color:'white', backgroundColor:'#0B648A', borderRadius:'5px'}}>
-                                        <Link to={`/path/explore/${path._id}`}> <h1>{path.title}</h1> </Link> 
+                                        <Link to={`/path/explore/${path._id}`}> <h1 style={{ color:'white'}} >{path.title}</h1> </Link> 
                                     </Card>
                                     <Divider>Topics</Divider>
-                                    <div style={{ padding: '1rem', display:'flex', flexDirection:'column', width:'350px' }} >
+                                    <div style={{ padding: '1rem', display:'flex', flexDirection:'column', width:'450px' }} >
                                             {path.topics?.map((topic, index) => (
-                                                <Card hoverable   >
-                                                    <Checkbox value={topic}>
+                                                <div style={{  display:'flex', flexDirection:'row', width:'450px' }} >
+                                                <Card hoverable  style={{  width:'380px', height:'70px', margin:'0px', padding:'0px', borderColor: '#1F79B5',  display:'flex', flexDirection:'row' }}  >
+                                                    <Checkbox value={topic}  onChange={activate}  >
                                                     <Link to={`/topicdetails/${topic._id}`}>
-                                                    <p>{topic.title}</p>
+                                                    {topic.title}
                                                     </Link>
                                                     </Checkbox>
                                                 </Card> 
+                                                </div>
                                             ))}
                                     </div>
                                     </Card>    
                                     </div>   
                                     ))}
-                            </Checkbox.Group>
+                                     </Checkbox.Group>
                                     </Form.Item>
+                                    </div>
                             </Form>
+                            
                             {/* modal to select the path to add new topics to */} 
                             <Modal
-                                title="Basic Modal"
+                               footer={null}
+                                title="Add topic to your paths"
                                 visible={isModalVisible}
                                 onCancel={handleCancel}
-                                okText="Add"
-                                cancelText="cancel"
+
                             >
                         <div > 
-                        <Form  onFinish={handleOk}>
+                        <Form  onFinish={handleOk} style={{  display:'flex', flexDirection:'column' }}>
                             <Form.Item name="checkbox-group">
-                            <Checkbox.Group > 
+                            <Checkbox.Group style={{ display:'flex', flexDirection:'column' }}> 
                                 {pathsy?.map(path => (
-                                <div>
-                                    <Checkbox  value={path}>
+                                <div style={{ display:'flex', flexDirection:'row', border:'	#DCDCDC solid 1px', marginTop:'10px'}}>
+                                    <Checkbox  value={path} onChange={activatePath} style={{ display:'flex', flexDirection:'row', alignItems:'center', margin:'3px 0 0 10px'}}>
                                         <h3>{path.title}</h3> 
                                     </Checkbox>
                                 </div>        
                                 ))}
                             </Checkbox.Group>
                             </Form.Item>
-                            <Button type="primary"  htmlType="submit" > Add to my paths  </Button> 
+                            {selectedPath? <Button type="primary"  htmlType="submit" > Add to my paths  </Button> : <Button style={{marginTop:'30px'}} disabled>Select topics to add</Button>}
                             </Form>
                             </div>
                             </Modal>
                         </div>
                     </div>
+                    
                 </div>
                 ):( 
                     <Skeleton active />

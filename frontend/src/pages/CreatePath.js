@@ -21,7 +21,6 @@ import {useContextInfo} from '../hooks/context'
  const CreatePath = (props) => {
     const [form] = Form.useForm()
     const {user}= useContextInfo()
-    const [isModalVisible, setIsModalVisible] = useState(true);
 
     const submitForm=  async (path) =>{ 
         const {data}= await createPath(
@@ -47,14 +46,16 @@ import {useContextInfo} from '../hooks/context'
 
         console.log(path)
         form.resetFields()
-        setIsModalVisible(false);
 
-        // props.history.push(`/dash/${user._id}`)
+
+        props.history.push(`/dash/${user._id}`)
         } 
 
 
     return (
-        <div>
+        <LayoutDash>
+
+        <div style={{width:'400px', marginLeft:'300px'}}>
 
             <Row>
         <Col span={24}>
@@ -163,7 +164,10 @@ import {useContextInfo} from '../hooks/context'
             </Form>
             </Col>
         </Row>
+        
         </div>
+        </LayoutDash>
+
     )
 }
 

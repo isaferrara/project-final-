@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useContextInfo } from '../hooks/context'
 import { getSinglePath, deletePath } from '../services/paths.js'
 import {  deleteTopic, createTopic} from '../services/topics.js'
-import { Skeleton, Divider, Card, Button, Modal, Form, Input} from 'antd'
+import { Skeleton, Divider, Card, Button, Modal, Form, Input, Space} from 'antd'
 import EditPath from '../components/EditPath'
 import PathInfo from '../components/PathInfo'
 import { Link } from 'react-router-dom'
@@ -76,30 +76,23 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
     <Divider>Topics</Divider>
     <Button type="primary" onClick={showModal} block >Add Topic</Button>
     <br />
-    
+    <div style={{marginTop: '40px',}}>
     {pathsy.topics.map((topic, i) => 
         <Link to={`/topic/${topic._id}`}> 
     <Card hoverable
      number={sum(i)} title={ (i+1) + '     ' + topic.title  } style={{marginBottom:'10px'}} >
-
-   
-    
     <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>  
  
 
-        <div style={{display:'flex', flexDirection:'column', textAlign:'left', marginLeft: '40px', padding: '20px'}}>
-        <p style={{marginBottom:'3px', marginTop:'5px'}} > 
+        <div style={{display:'flex', flexDirection:'column', textAlign:'left',  marginLeft: '40px', padding: '20px'}}>
 
-        <b>Objective:</b> 
-            {topic.objective}</p>
-            <p style={{marginBottom:'3px', paddingLeft:'0px'}} > 
-
-        <b>Duration:</b>
-        {topic.duration}</p>
+        <div><b>Objective</b> <p>  {topic.objective}</p></div>
+    
+       <div><b>Duration</b> <p>  {topic.duration}</p></div> 
+        
         </div>
-  
 
-            <div>
+            <div style={{marginTop: '60px'}}>
             <Button type="ghost" danger onClick={ async ()=> {
                 await deleteTopic(topic._id)
                 setChanges(!changes)}}>Delete</Button> 
@@ -108,7 +101,7 @@ const DetailsPath = ({ match: { params: { id } }, history }) => {
     </Card>
     </Link>
     )}
-    
+    </div>
     <Divider></Divider>
     <Button type="ghost" onClick={handleDelete} danger block >Delete Path</Button>
     

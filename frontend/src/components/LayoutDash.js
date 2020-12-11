@@ -84,7 +84,7 @@ const LayoutDash = ({ children }) => {
       }}
     >
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} 
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} 
        style={{shadowBox: '100px'}}>
         <Menu.Item key="1" icon={<UserOutlined />}>
         <Link to={`/dash/${user._id}`}>
@@ -92,7 +92,9 @@ const LayoutDash = ({ children }) => {
         </Link>
         </Menu.Item>
         <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-        Your topics
+        <Link to={`/news`}>
+           Newsfeed
+        </Link>        
         </Menu.Item>
         <Menu.Item key="3" icon={<UploadOutlined />}>
         <Link to={`/explore`}>
@@ -119,7 +121,7 @@ const LayoutDash = ({ children }) => {
             minHeight: 280,
           }}
         >
-        <div className="site-layout-background" style={{ padding: 44, textAlign: 'center', width:'1100px', background: '#fff', marginTop:'50px', shadowBox:'-12px -1px 81px -32px', borderRadius:'20px'}}>
+        <div style={{ padding: 44, textAlign: 'center', width:'1100px', background: '#fff', marginTop:'50px', shadowBox:'-12px -1px 81px -32px', borderRadius:'20px'}}>
         {children}
         </div>
 

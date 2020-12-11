@@ -27,7 +27,7 @@ import ExplorePaths from "./pages/ExplorePaths"
 import DetailsExplorePath from "./pages/DetailsExplorePath"
 import DetailsTopic from "./pages/DetailsTopic"
 import DiscoverPaths from './pages/DiscoverPaths';
-
+import Newsfeed from './pages/Newsfeed';
 
 ///Dummy Components
 //const Home = () => <h1>Home</h1>
@@ -54,6 +54,7 @@ const Router = () => {
       <Route path='/topicdetails/:id' component={DetailsTopic} exact />
       <PrivDash path='/login' component={Login} exact/>
       <Route path='/signup' component={Signup} exact/>
+      <Route path='/news' component={Newsfeed} exact/>
       <PrivateRoute path='/profile' component={Profile} exact />
       <Route path='/multimedia' component={Multimedia} exact />
       <Route path='/choose-donation' component={ChooseDonation}exact />

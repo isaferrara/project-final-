@@ -38,7 +38,10 @@ const Dash = () => {
         getPaths()
         }, [changes])
 
-
+        const handleCancel = () => {
+            setIsModalVisible(false);
+           
+        }
 
         //on submit all the selected topics user is adding to paths
         const onFinish = values => {
@@ -95,9 +98,7 @@ const Dash = () => {
             getPaths()
 
     }
-        const handleCancel = () => {
-            setIsModalVisible(false);
-        }
+
         return (
             <LayoutDash>
             <div>
@@ -106,9 +107,9 @@ const Dash = () => {
                 <div style={{ padding: '1rem 3rem', display:'flex', flexDirection:'column' }}>
                     <h1 style={{fontFamily:'Verdana', fontSize:'30px'}}><b>Your study paths</b></h1> 
                 <div style={{ padding: '1rem 3rem', display:'flex', flexDirection:'column'}}>
-                <Button type="primary"  onClick={showModal}  > Create new path  </Button> 
+                <Button type='primary' ><Link to={'/path/create'}  style={{fontFamily:'Arial', fontSize:'20px', color:'white', createBottom: '10px'}}> <b>Create new path </b> </Link> </Button>
                     <div style={{marginTop:'50px'}}>
-                    <Search placeholder="input search text" onChange={onSearch} allowClear style={{ width: 500 }} />                        <br />         
+                    <Search placeholder="What are you looking for?" onChange={onSearch} allowClear style={{ width: 500 }} />                        <br />         
                     </div>
                 <div style={{ padding: '1rem', display:'flex', flexDirection:'row', flexWrap: 'wrap'  }}>    
                         {pathsy?.map(path => (
@@ -117,7 +118,7 @@ const Dash = () => {
                             <Link to={`/path/${path._id}`}>
                                 <div >
                                     <Card type="inner" style={{ color:'white', backgroundColor:'#0B648A', borderRadius:'5px'}}>
-                                        <Title style={{ color:'white', fontFamily:'arial', fontWeight:'lighter'}} level={2} >{path.title}</Title>
+                                        <Title style={{ color:'white', fontFamily:'arial', fontWeight:'lighter', fontSize:'17px'}} level={2} >{path.title}</Title>
                                     </Card>
                                 </div> 
                             </Link>  
@@ -142,7 +143,7 @@ const Dash = () => {
                         onCancel={handleCancel}
                         cancelText="cancel"
                             >
-                            <CreatePath />
+                            <CreatePath handleCancel={handleCancel}/>
                             </Modal>
                 </div>
                 

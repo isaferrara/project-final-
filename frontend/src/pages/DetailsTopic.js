@@ -112,8 +112,10 @@ export const DetailsTopic = (props) => {
             }
         
             return (
-                <div style={{display:'flex', flexDirection:'column'}}>
+                <div style={{display:'flex', justifyContent:'center', width:'100%',  height:'100%', alignContent:'center'}}>
                     <LayoutDash>
+                    <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignContent:'center', marginLeft :'170px'}}>
+
                 {contenty?(
                     <div style={{width:'80vh'}}> 
 
@@ -128,7 +130,7 @@ export const DetailsTopic = (props) => {
                     </div>):(
                         <Skeleton active />
                     )}
-        
+                    </div>
                 </LayoutDash>
                 </div>
             )

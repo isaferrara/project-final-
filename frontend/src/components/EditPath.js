@@ -88,10 +88,12 @@ const EditPath = (props) => {
                 <Select.Option value="Cyber Security">Cyber Security</Select.Option>
                 </Select>
             </Form.Item>
-            <div>
-        <Button type="primary" htmlType="submit">
+            <div >
+            <div style={{margin:'20px'}}>
+        <Button type="primary" htmlType="submit" >
             Update
         </Button>
+        </div>
         <Button type="primary" onClick={cancelFn}>
             Cancel
         </Button>

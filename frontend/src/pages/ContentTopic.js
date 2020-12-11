@@ -112,23 +112,25 @@ export const ContentTopic = (props) => {
             }
         
             return (
-                <div style={{display:'flex', flexDirection:'column'}}>
-                    <LayoutDash>
+                <div style={{display:'flex', justifyContent:'center', width:'100%',  height:'100%', alignContent:'center'}}>
+                <LayoutDash style={{display:'flex', justifyContent:'center'}}>
+
+                <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignContent:'center', marginLeft :'170px'}}>
                 {contenty?(
                     <div style={{width:'80vh'}}> 
-                    <Form onFinish={onFinish} form={form}>
-                        <div style={{display:'flex', flexDirection:'row'}}>
+                    <Form onFinish={onFinish} form={form} type="dashed">
+                        <div style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
         
                         {/* BUTTONS */}
         
                         <Form.Item name="text" >
-                            <Button  onClick={setContentForms} style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
+                            <Button  onClick={setContentForms} style={{width:'20vh',height:'5vh', margin: '20px'}} type="dashed" icon={<PlusOutlined />}>
                                 Add text
                             </Button>
                         </Form.Item>
         
                         <Form.Item name="text" >
-                            <Button onClick={setLinkForms}  style={{width:'20vh',height:'5vh'}} type="dashed" icon={<PlusOutlined />}>
+                            <Button onClick={setLinkForms}  style={{width:'20vh',height:'5vh', margin: '20px'}} type="dashed" icon={<PlusOutlined />}>
                                 Add link
                             </Button>
                         </Form.Item>
@@ -152,6 +154,7 @@ export const ContentTopic = (props) => {
                         <Skeleton active />
                     )}
         
+                </div>
                 </LayoutDash>
                 </div>
             )

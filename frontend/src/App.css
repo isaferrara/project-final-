@@ -13,7 +13,7 @@ html{
 }
 .container-fluid {
   margin: 0 auto;
-  max-width: 1400px;
+  max-width: 1600px;
 }
 .ant-layout {
   background: #fff !important;

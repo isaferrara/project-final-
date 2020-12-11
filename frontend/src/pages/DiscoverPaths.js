@@ -45,9 +45,10 @@ const DiscoverPaths = () => {
           }
 
         return (
-            <div style={{  display:'flex', flexDirection:'column', justifyContent:'content', width:'1400px'}}>
-
             <LayoutApp>
+            <div style={{  display:'flex', flexDirection:'column', justifyContent:'content', width:'80%', marginLeft: '100px', marginRight: '100px', padding:'0 30px', backgroundColor:'	#DCDCDC'}}>
+
+
 
              {otherPaths?
                 (
@@ -63,7 +64,7 @@ const DiscoverPaths = () => {
                                     <div style={{borderRadius:' 20px ', margin:'10px',  width:'240px', marginRight:'20px'}}>
                                     <Card hoverable  style={{backgroundColor: 'white', borderRadius:'10px', boxShadow: '3px 4px 25px -7px rgba(0,0,0,0.75)', width:'260px'}} >
                                     <Card type="inner" style={{ color:'white', backgroundColor:'#0B648A', borderRadius:'5px'}}>
-                                        <Link to={`/login`}> <h1 style={{ color:'white'}}  >{path.title}</h1> </Link> 
+                                        <Link to={`/login`}> <h1 style={{ fontSize:'20px', color:'white'}}  >{path.title}</h1> </Link> 
                                   </Card>
                                     <Divider>Topics</Divider>
                                     <div style={{ padding: '1rem', display:'flex', flexDirection:'column', width:'350px' }} >
@@ -85,8 +86,8 @@ const DiscoverPaths = () => {
                     <Skeleton active />
                 )}
                 
-        </LayoutApp>
         </div>
+        </LayoutApp>
 
         )
     }
